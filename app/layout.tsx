@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css';
+import  './globals.css';
 import { LanguageProvider } from '@/lib/LanguageContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -9,14 +9,45 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: { default: 'A S SERVICE - Home Appliance Repair', template: '%s | A S SERVICE' },
-  description: 'Professional AC, Refrigerator, Washing Machine and TV repair services in Tamil Nadu. Fast, reliable and affordable.',
-  keywords: ['AC repair', 'refrigerator repair', 'washing machine repair', 'TV repair', 'home appliance service', 'Coimbatore'],
+  title: {
+  default: "AC, Refrigerator, Washing Machine & TV Repair in Theni | A S SERVICE",
+  template: "%s | A S SERVICE",
+},
+  description:
+"Professional AC, Refrigerator, Washing Machine and TV repair services in Theni. Doorstep service, experienced technicians, affordable pricing and same-day service.",
+ keywords: [
+  "AC Repair Theni",
+  "Washing Machine Repair Theni",
+  "Refrigerator Repair Theni",
+  "TV Repair Theni",
+  "Home Appliance Repair",
+  "Doorstep Appliance Service",
+],
   openGraph: {
-    title: 'A S SERVICE - Expert Home Appliance Repair',
-    description: 'Fast, reliable, and affordable home appliance repair services at your doorstep.',
-    type: 'website',
-  },
+  title: "A S SERVICE",
+  description: "...",
+  // url: "https://yourdomain.com",
+  siteName: "A S SERVICE",
+  images: [
+    {
+      url: "/og-image.jpg",
+      width: 1200,
+      height: 630,
+    },
+  ],
+  locale: "en_IN",
+  type: "website",
+},
+twitter: {
+  card: "summary_large_image",
+  title: "A S SERVICE",
+  description: "...",
+  images: ["/og-image.jpg"],
+},
+robots: {
+  index: true,
+  follow: true,
+},
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
