@@ -7,10 +7,49 @@ import { getServices } from '@/lib/api';
 import ServiceCard from '@/components/ServiceCard';
 import type { Service } from '@/types';
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does AC repair cost in Theni?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our AC repair service starts from ₹500. The final cost depends on the issue and spare parts required."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you provide same-day home service?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We provide same-day doorstep service in most areas of Theni."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which appliances do you repair?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We repair AC, Refrigerator, Washing Machine and LED/Smart TV."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you provide service warranty?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We provide warranty on eligible repair services."
+      }
+    }
+  ]
+};
+
 export default function HomePage() {
   const { t, lang } = useLanguage();
   const [services, setServices] = useState<Service[]>([]);
-
+ 
   useEffect(() => {
     getServices().then((d: unknown) => setServices(d as Service[])).catch(() => {});
   }, []);
@@ -44,6 +83,14 @@ export default function HomePage() {
   ];
 
   return (
+      <>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(faqJsonLd),
+      }}
+    />
+
     <div>
 
       {/* ── Hero ── */}
@@ -164,14 +211,62 @@ export default function HomePage() {
               <Wrench className="w-5 h-5" />
               {t.hero.bookNow}
             </Link>
-            <a href="tel:+919999999999" className="btn-secondary text-base px-8 py-4">
+            <a href="tel:+919025649921" className="btn-secondary text-base px-8 py-4">
               <Phone className="w-5 h-5" />
               {lang === 'ta' ? 'இப்போது அழைக்கவும்' : 'Call Now'}
             </a>
           </div>
         </div>
       </section>
+      <section className="py-20 bg-white">
+  <div className="max-w-4xl mx-auto px-4">
+    <h2 className="text-3xl font-bold text-center mb-10">
+      Frequently Asked Questions
+    </h2>
+
+    <div className="space-y-6">
+
+      <div className="border rounded-xl p-6">
+        <h3 className="font-semibold text-lg">
+          How much does AC repair cost in Theni?
+        </h3>
+        <p className="text-gray-600 mt-2">
+          AC repair starts from ₹500 depending on the issue and spare parts.
+        </p>
+      </div>
+
+      <div className="border rounded-xl p-6">
+        <h3 className="font-semibold text-lg">
+          Do you provide same-day home service?
+        </h3>
+        <p className="text-gray-600 mt-2">
+          Yes. Same-day doorstep service is available in most areas of Theni.
+        </p>
+      </div>
+
+      <div className="border rounded-xl p-6">
+        <h3 className="font-semibold text-lg">
+          Which appliances do you repair?
+        </h3>
+        <p className="text-gray-600 mt-2">
+          We repair AC, Refrigerator, Washing Machine and LED/Smart TVs.
+        </p>
+      </div>
+
+      <div className="border rounded-xl p-6">
+        <h3 className="font-semibold text-lg">
+          Do you provide service warranty?
+        </h3>
+        <p className="text-gray-600 mt-2">
+          Yes. Warranty is available on eligible repair services.
+        </p>
+      </div>
 
     </div>
-  );
+  </div>
+</section>
+
+    </div>
+  </>
+);
 }
