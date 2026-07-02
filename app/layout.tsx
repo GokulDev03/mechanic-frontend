@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   "Home Appliance Repair",
   "Doorstep Appliance Service",
 ],
+ verification: {
+    google: "_LEUBO8pa94_HAHN1lK8D27IwPjBAZymoNr6K4Vi90g",
+  },
   openGraph: {
   title: "A S SERVICE",
   description: "...",
