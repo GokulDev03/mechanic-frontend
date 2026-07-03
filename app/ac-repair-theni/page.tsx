@@ -48,6 +48,37 @@ const faqJsonLd = {
     }
   ]
 };
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://yourdomain.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "AC Repair",
+      "item": "https://yourdomain.com/ac-repair-theni"
+    }
+  ]
+};
+
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "AC Repair Service",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "A S SERVICE"
+  },
+  "areaServed": "Theni",
+  "serviceType": "Air Conditioner Repair",
+  "url": "https://yourdomain.com/ac-repair-theni"
+};
 
 export default function ACRepairPage() {
   return (
@@ -59,6 +90,12 @@ export default function ACRepairPage() {
           __html: JSON.stringify(faqJsonLd),
         }}
       />
+      <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(serviceJsonLd),
+  }}
+/>
 
       <h1 className="text-4xl font-bold mb-6">
         AC Repair Service in Theni

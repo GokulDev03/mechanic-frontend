@@ -45,6 +45,39 @@ const faqJsonLd = {
     }
   ]
 };
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://mechanic-frontend-smoky.vercel.app/#business",
+  "name": "A S SERVICE",
+  "image": "https://mechanic-frontend-smoky.vercel.app/public/AS-engneering.png",
+  "url": "https://mechanic-frontend-smoky.vercel.app",
+  "telephone": "+91-9025649921",
+  "priceRange": "₹₹",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Theni",
+    "addressRegion": "Tamil Nadu",
+    "addressCountry": "IN"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Theni"
+  },
+  "openingHours": "Mo-Su 08:00-20:00",
+  "serviceArea": {
+    "@type": "Place",
+    "name": "Theni"
+  }
+};
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "A S SERVICE",
+  "url": "https://mechanic-frontend-smoky.vercel.app",
+ "image": "https://mechanic-frontend-smoky.vercel.app/public/AS-engneering.png",
+  "telephone": "+919025649921"
+};
 
 export default function HomePage() {
   const { t, lang } = useLanguage();
@@ -90,6 +123,18 @@ export default function HomePage() {
         __html: JSON.stringify(faqJsonLd),
       }}
     />
+    <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(localBusinessJsonLd),
+  }}
+/>
+<script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(organizationJsonLd),
+  }}
+/>
 
     <div>
 

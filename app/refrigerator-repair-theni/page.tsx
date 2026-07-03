@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
     title: "Refrigerator Repair Service in Theni | A S SERVICE",
     description:
-        "Professional AC repair service in Theni. AC installation, gas filling, cooling issue repair and doorstep service at affordable prices.",
+        "Professional Refrigerator Repair service in Theni. AC installation, gas filling, cooling issue repair and doorstep service at affordable prices.",
     keywords: [
         " Refrigerator Cooling Issue",
         "Compressor Repair",
