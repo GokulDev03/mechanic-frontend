@@ -98,7 +98,7 @@ export default function Footer() {
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-amber-500 shrink-0" />
                 <a href="mailto:info@asservice.com" className="hover:text-white transition-colors">
-                  info@asservice.com
+                 affra.service@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-2">

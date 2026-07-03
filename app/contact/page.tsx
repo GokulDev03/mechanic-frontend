@@ -11,8 +11,8 @@ export default function ContactPage() {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState('');
 
-  const PHONE = process.env.NEXT_PUBLIC_COMPANY_PHONE || '+91-9999999999';
-  const WA = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919999999999';
+  const PHONE = process.env.NEXT_PUBLIC_COMPANY_PHONE || '+91 88070 86727';
+  const WA = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+91 88070 86727';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ export default function ContactPage() {
   const contacts = [
     { Icon: Phone, label: t.contact.phone, value: PHONE, href: `tel:${PHONE}`, color: 'bg-blue-100 text-blue-600' },
     { Icon: MessageCircle, label: t.contact.whatsapp, value: 'WhatsApp Chat', href: `https://wa.me/${WA}`, color: 'bg-green-100 text-green-600' },
-    { Icon: Mail, label: t.contact.email, value: 'info@asservice.com', href: 'mailto:info@asservice.com', color: 'bg-orange-100 text-orange-600' },
+{ Icon: Mail, label: t.contact.email, value: 'affra.service@gmail.com', href: 'mailto:affra.service@gmail.com', color: 'bg-orange-100 text-orange-600' },
     { Icon: MapPin, label: t.contact.address, value: t.contact.companyAddress, href: '#map', color: 'bg-red-100 text-red-600' },
   ];
 
