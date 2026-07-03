@@ -263,6 +263,67 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <section className="py-20 bg-gray-50">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <h2 className="text-3xl lg:text-4xl font-bold text-center text-gray-900">
+      What Our Customers Say
+    </h2>
+
+    <p className="text-center text-gray-500 mt-3 mb-12">
+      Trusted by thousands of customers across Theni District
+    </p>
+
+    <div className="grid md:grid-cols-3 gap-8">
+
+      <div className="bg-white rounded-2xl p-6 shadow-sm border">
+        <div className="text-yellow-500 text-xl">★★★★★</div>
+
+        <p className="text-gray-600 mt-4 leading-7">
+          Excellent AC repair service. The technician arrived on time,
+          fixed the cooling problem quickly and charged a reasonable price.
+        </p>
+
+        <div className="mt-5">
+          <h3 className="font-semibold">Ravi Kumar</h3>
+          <p className="text-sm text-gray-500">Theni</p>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-2xl p-6 shadow-sm border">
+        <div className="text-yellow-500 text-xl">★★★★★</div>
+
+        <p className="text-gray-600 mt-4 leading-7">
+          Very professional refrigerator repair service.
+          Same-day doorstep service and genuine spare parts.
+        </p>
+
+        <div className="mt-5">
+          <h3 className="font-semibold">Priya S</h3>
+          <p className="text-sm text-gray-500">Periyakulam</p>
+        </div>
+      </div>
+
+      <div className="bg-white rounded-2xl p-6 shadow-sm border">
+        <div className="text-yellow-500 text-xl">★★★★★</div>
+
+        <p className="text-gray-600 mt-4 leading-7">
+          Washing machine repaired within one hour.
+          Friendly technician and affordable pricing.
+        </p>
+
+        <div className="mt-5">
+          <h3 className="font-semibold">Karthik M</h3>
+          <p className="text-sm text-gray-500">Cumbum</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+ 
       <section className="py-20 bg-white">
   <div className="max-w-4xl mx-auto px-4">
     <h2 className="text-3xl font-bold text-center mb-10">
@@ -309,6 +370,63 @@ export default function HomePage() {
 
     </div>
   </div>
+</section>
+<section className="py-20">
+
+<div className="max-w-6xl mx-auto px-4">
+
+<h2 className="text-3xl font-bold text-center mb-10">
+Areas We Serve
+</h2>
+
+<div className="grid md:grid-cols-3 gap-5">
+
+<div className="border rounded-xl p-5">
+<h3 className="font-bold">Theni</h3>
+<p className="text-gray-600 mt-2">
+Doorstep appliance repair service.
+</p>
+</div>
+
+<div className="border rounded-xl p-5">
+<h3 className="font-bold">Periyakulam</h3>
+<p className="text-gray-600 mt-2">
+Same-day AC & Refrigerator repair.
+</p>
+</div>
+
+<div className="border rounded-xl p-5">
+<h3 className="font-bold">Bodinayakanur</h3>
+<p className="text-gray-600 mt-2">
+All home appliance services.
+</p>
+</div>
+
+<div className="border rounded-xl p-5">
+<h3 className="font-bold">Andipatti</h3>
+<p className="text-gray-600 mt-2">
+Experienced technicians available.
+</p>
+</div>
+
+<div className="border rounded-xl p-5">
+<h3 className="font-bold">Cumbum</h3>
+<p className="text-gray-600 mt-2">
+Affordable doorstep repair.
+</p>
+</div>
+
+<div className="border rounded-xl p-5">
+<h3 className="font-bold">Chinnamanur</h3>
+<p className="text-gray-600 mt-2">
+Quick appliance repair services.
+</p>
+</div>
+
+</div>
+
+</div>
+
 </section>
 
     </div>

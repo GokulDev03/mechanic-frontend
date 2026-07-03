@@ -26,27 +26,24 @@ const jsonLd = {
     addressCountry: "IN",
   },
   sameAs: [],
-  areaServed: [
-    "Theni",
-    "Periyakulam",
-    "Andipatti",
-    "Bodinayakanur",
-    "Cumbum",
-    "Uthamapalayam",
-    "Chinnamanur",
-    "Gudalur",
-    "Veerapandi",
-    "Vaigai Dam",
-    "Thevaram",
-    "Myladumparai",
-    "Kadamalaikundu",
-    "Kambam",
-    "Rajakkapatti",
-    "Silamalai",
-    "Devadanapatti",
-    "Melagaram",
-    "Batlagundu",
-  ],
+ areaServed: [
+  "Theni",
+  "Periyakulam",
+  "Andipatti",
+  "Bodinayakanur",
+  "Cumbum",
+  "Uthamapalayam",
+  "Madurai",
+  "Melur",
+  "Usilampatti",
+  "Thirumangalam",
+  "Dindigul",
+  "Palani",
+  "Kodaikanal",
+  "Oddanchatram",
+  "Vedasandur",
+  "Natham",
+],
   openingHours: "Mo-Su 08:00-20:00",
   priceRange: "₹₹",
 };
@@ -184,36 +181,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <body className={inter.className}>
       <LanguageProvider>
         <Navbar />
-          {/* <script
-    type="application/ld+json"
-    dangerouslySetInnerHTML={{
-      __html: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "A S SERVICE",
-        "image": "https://mechanic-frontend-smoky.vercel.app/logo.png",
-        "url": "https://mechanic-frontend-smoky.vercel.app",
-        "telephone": "+91 9025649921",
-        "priceRange": "₹₹",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Theni",
-          "addressRegion": "Tamil Nadu",
-          "postalCode": "625531",
-          "addressCountry": "IN"
-        },
-        "areaServed": [
-          "Theni",
-          "Periyakulam",
-          "Bodinayakanur",
-          "Andipatti",
-          "Cumbum",
-          "Chinnamanur"
-        ],
-        "openingHours": "Mo-Su 08:00-20:00"
-      }),
-    }}
-  /> */}
         <main className="min-h-screen">{children}</main>
         <Footer />
         <WhatsAppButton />
