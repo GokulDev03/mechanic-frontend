@@ -60,15 +60,17 @@ const localBusinessJsonLd = {
     "addressRegion": "Tamil Nadu",
     "addressCountry": "IN"
   },
-  "areaServed": {
-    "@type": "City",
-    "name": "Theni"
-  },
+  "areaServed": [
+    { "@type": "City", "name": "Theni" },
+    { "@type": "City", "name": "Madurai" },
+    { "@type": "City", "name": "Dindigul" }
+  ],
   "openingHours": "Mo-Su 08:00-20:00",
-  "serviceArea": {
-    "@type": "Place",
-    "name": "Theni"
-  }
+  "serviceArea": [
+    { "@type": "City", "name": "Theni" },
+    { "@type": "City", "name": "Madurai" },
+    { "@type": "City", "name": "Dindigul" }
+  ]
 };
 const organizationJsonLd = {
   "@context": "https://schema.org",
@@ -76,7 +78,7 @@ const organizationJsonLd = {
   "name": "A S SERVICE",
   "url": "https://mechanic-frontend-smoky.vercel.app",
  "image": "https://mechanic-frontend-smoky.vercel.app/public/AS-engneering.png",
-  "telephone": "+919025649921"
+  "telephone": "+91 88070 86727"
 };
 
 export default function HomePage() {
@@ -164,14 +166,72 @@ export default function HomePage() {
                 <Wrench className="w-5 h-5" />
                 {t.hero.bookNow}
               </Link>
+              
               <Link href="/booking/status" className="btn-secondary text-base px-8 py-4">
                 {t.hero.trackBooking}
                 <ArrowRight className="w-5 h-5" />
               </Link>
+              <p className="text-sm text-gray-500 mb-4">
+  We repair all brands: LG, Voltas, Samsung, Blue Star, Daikin & more
+</p>
             </div>
           </div>
         </div>
       </section>
+     
+    {/* ── Service Areas Bar - Professional Version ── */}
+<section className="bg-gradient-to-r from-gray-50 via-white to-gray-50 border-b border-gray-100">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+
+      {/* Label with icon */}
+      <div className="flex items-center gap-2 text-gray-700">
+        <div className="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+          <svg
+            className="w-4.5 h-4.5 text-amber-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={2}
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+            />
+          </svg>
+        </div>
+        <span className="font-semibold text-sm sm:text-base">
+          {lang === 'ta' ? 'சேவை வழங்கும் மாவட்டங்கள்' : 'Proudly Serving'}
+        </span>
+      </div>
+
+      {/* Divider - hidden on mobile */}
+      <div className="hidden sm:block w-px h-6 bg-gray-200" />
+
+      {/* District chips */}
+      <div className="flex flex-wrap items-center justify-center gap-2.5">
+        {['Theni', 'Madurai', 'Dindigul'].map((district) => (
+          <div
+            key={district}
+            className="group flex items-center gap-1.5 bg-white border border-gray-200 hover:border-amber-300 hover:bg-amber-50 px-4 py-2 rounded-lg shadow-sm hover:shadow transition-all duration-200"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+            <span className="text-sm font-medium text-gray-800 group-hover:text-amber-700">
+              {district}
+            </span>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</section>
 
       {/* ── Stats bar — #FFFBEB ── */}
       <section className="bg-amber-50 border-y border-amber-100">
@@ -256,7 +316,7 @@ export default function HomePage() {
               <Wrench className="w-5 h-5" />
               {t.hero.bookNow}
             </Link>
-            <a href="tel:+919025649921" className="btn-secondary text-base px-8 py-4">
+            <a href="tel:+91 88070 86727" className="btn-secondary text-base px-8 py-4">
               <Phone className="w-5 h-5" />
               {lang === 'ta' ? 'இப்போது அழைக்கவும்' : 'Call Now'}
             </a>
@@ -371,62 +431,148 @@ export default function HomePage() {
     </div>
   </div>
 </section>
-<section className="py-20">
+{/* ── Areas We Serve - Professional Version ── */}
+<section className="py-20 bg-white">
+  <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-<div className="max-w-6xl mx-auto px-4">
+    {/* Section Header */}
+    <div className="text-center mb-14">
+      <span className="inline-block bg-amber-50 text-amber-700 border border-amber-200 rounded-full px-4 py-1.5 text-sm font-medium mb-4">
+        Service Coverage
+      </span>
+      <h2 className="text-3xl lg:text-4xl font-extrabold text-gray-900 mb-3">
+        Areas We Serve
+      </h2>
+      <p className="text-gray-500 max-w-xl mx-auto">
+        Doorstep appliance repair service across Theni, Madurai and Dindigul districts
+      </p>
+    </div>
 
-<h2 className="text-3xl font-bold text-center mb-10">
-Areas We Serve
-</h2>
+    {/* District Groups */}
+    <div className="space-y-10">
 
-<div className="grid md:grid-cols-3 gap-5">
+      {/* Theni District */}
+      <div className="bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100">
+        <div className="flex items-center gap-3 mb-5">
+          <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center flex-shrink-0">
+            <svg className="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 className="font-bold text-lg text-gray-900">Theni District</h3>
+            <p className="text-sm text-gray-500">Head office & fastest response</p>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-2.5">
+          {[
+            { name: 'Theni', tag: 'Doorstep repair' },
+            { name: 'Periyakulam', tag: 'Same-day service' },
+            { name: 'Bodinayakanur', tag: 'All appliances' },
+            { name: 'Andipatti', tag: 'Experienced techs' },
+            { name: 'Cumbum', tag: 'Affordable repair' },
+            { name: 'Chinnamanur', tag: 'Quick service' },
+          ].map((area) => (
+            <div
+              key={area.name}
+              className="group bg-white border border-gray-200 hover:border-amber-300 rounded-xl px-4 py-2.5 shadow-sm hover:shadow-md transition-all duration-200"
+            >
+              <div className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                <span className="font-semibold text-sm text-gray-800">{area.name}</span>
+              </div>
+              <p className="text-xs text-gray-500 mt-0.5">{area.tag}</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
-<div className="border rounded-xl p-5">
-<h3 className="font-bold">Theni</h3>
-<p className="text-gray-600 mt-2">
-Doorstep appliance repair service.
-</p>
-</div>
+      {/* Madurai District */}
+      <div className="bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100">
+        <div className="flex items-center gap-3 mb-5">
+          <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+            <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 className="font-bold text-lg text-gray-900">Madurai District</h3>
+            <p className="text-sm text-gray-500">AC, Fridge, TV & Washing Machine repair</p>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-2.5">
+          {[
+            { name: 'Madurai', tag: 'Doorstep repair' },
+            { name: 'Anna Nagar', tag: 'Quick service' },
+            { name: 'KK Nagar', tag: 'Same-day repair' },
+            { name: 'Villapuram', tag: 'All appliances' },
+          ].map((area) => (
+            <div
+              key={area.name}
+              className="group bg-white border border-gray-200 hover:border-blue-300 rounded-xl px-4 py-2.5 shadow-sm hover:shadow-md transition-all duration-200"
+            >
+              <div className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                <span className="font-semibold text-sm text-gray-800">{area.name}</span>
+              </div>
+              <p className="text-xs text-gray-500 mt-0.5">{area.tag}</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
-<div className="border rounded-xl p-5">
-<h3 className="font-bold">Periyakulam</h3>
-<p className="text-gray-600 mt-2">
-Same-day AC & Refrigerator repair.
-</p>
-</div>
+      {/* Dindigul District */}
+      <div className="bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100">
+        <div className="flex items-center gap-3 mb-5">
+          <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center flex-shrink-0">
+            <svg className="w-5 h-5 text-purple-600" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 className="font-bold text-lg text-gray-900">Dindigul District</h3>
+            <p className="text-sm text-gray-500">Expert technicians for all repairs</p>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-2.5">
+          {[
+            { name: 'Dindigul', tag: 'Doorstep repair' },
+            { name: 'Palani', tag: 'Same-day service' },
+            { name: 'Kodaikanal', tag: 'All appliances' },
+            { name: 'Nilakottai', tag: 'Quick response' },
+            { name: 'Batlagundu', tag: 'Affordable repair' },
+          ].map((area) => (
+            <div
+              key={area.name}
+              className="group bg-white border border-gray-200 hover:border-purple-300 rounded-xl px-4 py-2.5 shadow-sm hover:shadow-md transition-all duration-200"
+            >
+              <div className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                <span className="font-semibold text-sm text-gray-800">{area.name}</span>
+              </div>
+              <p className="text-xs text-gray-500 mt-0.5">{area.tag}</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
-<div className="border rounded-xl p-5">
-<h3 className="font-bold">Bodinayakanur</h3>
-<p className="text-gray-600 mt-2">
-All home appliance services.
-</p>
-</div>
+    </div>
 
-<div className="border rounded-xl p-5">
-<h3 className="font-bold">Andipatti</h3>
-<p className="text-gray-600 mt-2">
-Experienced technicians available.
-</p>
-</div>
+    {/* Bottom note */}
+    <div className="mt-10 text-center">
+      <p className="text-sm text-gray-500">
+        Don't see your area listed?{' '}
+        <a href="tel:+918807086727" className="text-amber-600 font-semibold hover:underline">
+          Call us
+        </a>{' '}
+        — we may still be able to help.
+      </p>
+    </div>
 
-<div className="border rounded-xl p-5">
-<h3 className="font-bold">Cumbum</h3>
-<p className="text-gray-600 mt-2">
-Affordable doorstep repair.
-</p>
-</div>
-
-<div className="border rounded-xl p-5">
-<h3 className="font-bold">Chinnamanur</h3>
-<p className="text-gray-600 mt-2">
-Quick appliance repair services.
-</p>
-</div>
-
-</div>
-
-</div>
-
+  </div>
 </section>
 
     </div>
