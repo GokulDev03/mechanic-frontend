@@ -45,6 +45,8 @@ export default function ContactPage() {
         </div>
       </section>
 
+     
+
       <section className="py-16 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -82,9 +84,11 @@ export default function ContactPage() {
 
               <div id="map" className="card overflow-hidden rounded-xl h-56">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125319.41556895!2d76.8856!3d11.0168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859af2f971cb5%3A0x2fc1c81e183ed282!2sCoimbatore%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1234567890"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4394.548897219347!2d77.34736044689335!3d10.016612347292883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4177e8fa61c88811%3A0x3b40d70b3bd45538!2sA%20S%20SERVICE!5e1!3m2!1sen!2sin!4v1783331423725!5m2!1sen!2sin"
+                  // src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125319.41556895!2d76.8856!3d11.0168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859af2f971cb5%3A0x2fc1c81e183ed282!2sCoimbatore%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1234567890"
                   width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy"
                 />
+                {/* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4394.548897219347!2d77.34736044689335!3d10.016612347292883!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4177e8fa61c88811%3A0x3b40d70b3bd45538!2sA%20S%20SERVICE!5e1!3m2!1sen!2sin!4v1783331423725!5m2!1sen!2sin"></iframe> */}
               </div>
             </div>
 

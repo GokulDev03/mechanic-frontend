@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Wrench, Phone, Mail, MapPin, MessageCircle } from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
+import Image from 'next/image';
 
 export default function Footer() {
   const { t, lang } = useLanguage();
@@ -22,12 +23,23 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center">
+              {/* <div className="w-8 h-8 bg-amber-500 rounded-lg flex items-center justify-center">
                 <Wrench className="w-4 h-4 text-white" />
-              </div>
-              <span className="text-xl font-bold">
+              </div> */}
+              {/* <span className="text-xl font-bold">
                 A S <span className="text-amber-500">SERVICE</span>
-              </span>
+              </span> */}
+                 <Link href="/" className="flex items-center gap-1 font-bold text-xl text-gray-900">
+ <Image
+  src="/logo4.png"
+  alt="AS Service Logo"
+  width={220}
+  height={70}
+  className="h-16 w-auto object-contain"
+  priority
+/>
+  
+</Link>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
               {lang === 'ta'
@@ -43,7 +55,7 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2">
               {[
-                { href: '/services', label: t.nav.services },
+                // { href: '/services', label: t.nav.services },
                 { href: '/booking', label: t.nav.booking },
                 { href: '/booking/status', label: t.nav.status },
                 { href: '/contact', label: t.nav.contact },

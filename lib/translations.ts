@@ -44,7 +44,7 @@ export const translations = {
       next: 'Continue', back: 'Back', confirm: 'Confirm Booking',
       successTitle: 'Booking Confirmed!',
       successMsg: 'Your booking number is',
-      successSub: 'We will contact you shortly. Save this number to track your booking.',
+      // successSub: 'We will contact you shortly. Save this number to track your booking.',
       trackNow: 'Track My Booking', bookAnother: 'Book Another Service',
       review: 'Review Your Booking',
       timeSlots: ['9:00 AM - 11:00 AM', '11:00 AM - 1:00 PM', '2:00 PM - 4:00 PM', '4:00 PM - 6:00 PM'],
@@ -66,7 +66,7 @@ export const translations = {
     contact: {
       title: 'Contact Us', subtitle: 'We\'re here to help. Reach us through any of these channels.',
       phone: 'Phone', whatsapp: 'WhatsApp', email: 'Email', address: 'Address',
-      companyAddress: '123, Main Street, Coimbatore, Tamil Nadu - 641001',
+      companyAddress: '2982+JVX, Fire Engine Office Rd, Ammankulam, Bodinayakanur, Tamil Nadu 625513',
       sendMessage: 'Send Us a Message',
       name: 'Your Name', phoneField: 'Phone Number', messageField: 'Your Message',
       submit: 'Send Message', sending: 'Sending...', sent: 'Message sent! We\'ll contact you soon.',

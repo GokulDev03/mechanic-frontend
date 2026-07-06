@@ -102,8 +102,8 @@ export const metadata: Metadata = {
     google: "_LEUBO8pa94_HAHN1lK8D27IwPjBAZymoNr6K4Vi90g",
   },
   icons: {
-    icon: "/favicon.ico.png",
-    shortcut: "/favicon.ico",
+    icon: "/logo3.png",
+    shortcut: "/logo3.png",
     apple: "/apple-touch-icon.png",
   },
   openGraph: {

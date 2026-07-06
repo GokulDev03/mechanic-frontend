@@ -14,11 +14,12 @@ export default function Navbar() {
 
   const links = [
     { href: '/', label: t.nav.home },
-    { href: '/services', label: t.nav.services },
+    // { href: '/services', label: t.nav.services },
     { href: '/booking', label: t.nav.booking },
-    { href: '/booking/status', label: t.nav.status },
+    // { href: '/booking/status', label: t.nav.status },
     { href: '/contact', label: t.nav.contact },
     { href: '/about', label: t.nav.about },
+
   ];
 
   const isAdmin = pathname.startsWith('/admin') || pathname.startsWith('/technician');
@@ -30,16 +31,17 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
 
           {/* Logo */}
-   <Link href="/" className="flex items-center gap-2 font-bold text-xl text-gray-900">
-  <Image
-    src="/AS-engneering.png"
-    alt="AS Engineering logo"
-    width={40}
-    height={40}
-    className="rounded-md object-cover w-10 h-10 shadow-sm"
-  />
+   <Link href="/" className="flex items-center gap-1 font-bold text-xl text-gray-900">
+ <Image
+  src="/logo3.png"
+  alt="AS Service Logo"
+  width={220}
+  height={70}
+  className="h-16 w-auto object-contain"
+  priority
+/>
   <span>
-    A S <span className="text-amber-500">SERVICE</span>
+   <span className="text-black-500 font-extrabold ">SERVICE</span>
   </span>
 </Link>
 
@@ -78,6 +80,12 @@ export default function Navbar() {
             >
               {t.nav.booking}
             </Link>
+            <a
+  href="tel:+918807086727"
+  className="hidden sm:inline-flex items-center gap-2 bg-black hover:bg-gray-800 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
+>
+  📞 Call Now
+</a>
             <button
               onClick={() => setOpen(!open)}
               className="lg:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100"
@@ -112,6 +120,12 @@ export default function Navbar() {
           >
             {lang === 'en' ? '🇮🇳 Switch to தமிழ்' : '🇬🇧 Switch to English'}
           </button>
+            <a
+  href="tel:+918807086727"
+  className="hidden sm:inline-flex items-center gap-2 bg-black hover:bg-gray-800 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
+>
+  📞 Call Now
+</a>
         </div>
       )}
     </nav>

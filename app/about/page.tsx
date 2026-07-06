@@ -115,6 +115,36 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      <section className="py-10 bg-gray-50">
+  <div className="max-w-3xl mx-auto px-4">
+    <div className="bg-white border border-orange-200 rounded-2xl shadow-md p-6 flex flex-col md:flex-row items-center justify-between gap-5">
+
+      <div className="text-center md:text-left">
+        <div className="flex justify-center md:justify-start text-yellow-400 text-xl mb-2">
+          ⭐⭐⭐⭐⭐
+        </div>
+
+        <h3 className="text-xl font-bold text-gray-900">
+          Enjoyed Our Service?
+        </h3>
+
+        <p className="text-gray-600 text-sm mt-1">
+          We'd love to hear your feedback. Please leave us a Google Review.
+        </p>
+      </div>
+
+      <a
+        href="https://maps.app.goo.gl/cM7MmZp8w7pD7Ut39"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105"
+      >
+        ⭐ Leave Review
+      </a>
+
+    </div>
+  </div>
+</section>
     </div>
   );
 }

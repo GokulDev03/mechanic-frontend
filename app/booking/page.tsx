@@ -104,27 +104,32 @@ Time: ${form.preferred_time_slot}`;
         <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
           <CheckCircle className="w-10 h-10 text-green-500" />
         </div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">{t.booking.successTitle}</h2>
-        <p className="text-gray-500 mb-4">{t.booking.successMsg}</p>
-        <div className="inline-block bg-primary-50 border-2 border-primary-200 rounded-xl px-8 py-4 mb-4">
-          <span className="text-3xl font-extrabold text-primary-800">{bookingNumber}</span>
-        </div>
-        <p className="text-gray-400 text-sm mb-8">{t.booking.successSub}</p>
-        <div className="flex flex-wrap gap-4 justify-center">
-          <button
-            onClick={() => router.push(`/booking/status?q=${bookingNumber}`)}
-            className="btn-primary"
-          >
-            {t.booking.trackNow}
-          </button>
+        <p className="text-gray-600 mb-2">
+    Thank you for choosing our service.
+  </p>
+
+  <p className="text-gray-700">
+    Please call us at{" "}
+    <a
+      href="tel:+918807086727"
+      className="font-semibold text-blue-600 hover:underline"
+    >
+      +91 88070 86727
+    </a>{" "}
+    to confirm your booking and schedule your service.
+  </p>
+
+  <p className="mt-4 text-sm italic text-gray-500">
+    "Quality service isn't just our job — it's our commitment."
+  </p>
           <button
             onClick={() => { setStep(1); setForm({ service_id: '', customer_name: '', customer_phone: '', customer_address: '', appliance_brand: '', issue_description: '', preferred_date: '', preferred_time_slot: '' }); }}
-            className="btn-outline"
+            className="btn-outline mt-4"
           >
             {t.booking.bookAnother}
           </button>
         </div>
-      </div>
+      
     );
   }
 
@@ -174,7 +179,7 @@ Time: ${form.preferred_time_slot}`;
                   </div>
                   <div>
                     <p className="font-semibold text-gray-800">{lang === 'ta' ? s.name_ta : s.name_en}</p>
-                    <p className="text-sm text-gray-400">₹{s.price_from} – ₹{s.price_to}</p>
+              
                   </div>
                 </button>
               );
@@ -268,7 +273,7 @@ Time: ${form.preferred_time_slot}`;
       )}
 
       {/* Navigation */}
-      <div className="flex justify-between mt-8 pt-6 border-t border-gray-100">
+<div className="flex flex-col-reverse sm:flex-row justify-between items-stretch sm:items-center gap-4 mt-8 pt-6 border-t border-gray-100">
         {step > 1 ? (
           <button onClick={back} className="flex items-center gap-2 text-gray-600 hover:text-gray-800 font-medium">
             <ChevronLeft className="w-5 h-5" />
@@ -276,15 +281,15 @@ Time: ${form.preferred_time_slot}`;
           </button>
         ) : <div />}
         {step < 4 ? (
-          <button onClick={next} className="btn-primary">
+          <button onClick={next} className="btn-primary w-full sm:w-auto">
             {t.booking.next}
             <ChevronRight className="w-5 h-5" />
           </button>
         ) : (
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
             <button
               onClick={handleWhatsAppBooking}
-              className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-xl font-medium transition-colors"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-xl font-medium transition-colors"
             >
               {/* WhatsApp icon */}
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">

@@ -54,7 +54,7 @@ const localBusinessJsonLd = {
   "@type": "LocalBusiness",
   "@id": "https://mechanic-frontend-smoky.vercel.app/#business",
   "name": "A S SERVICE",
-  "image": "https://mechanic-frontend-smoky.vercel.app/public/AS-engneering.png",
+  "image": "https://mechanic-frontend-smoky.vercel.app/public/logo3.png",
   "url": "https://mechanic-frontend-smoky.vercel.app",
   "telephone": "+91-9025649921",
   "priceRange": "₹₹",
@@ -81,7 +81,7 @@ const organizationJsonLd = {
   "@type": "Organization",
   "name": "A S SERVICE",
   "url": "https://mechanic-frontend-smoky.vercel.app",
-  "image": "https://mechanic-frontend-smoky.vercel.app/public/AS-engneering.png",
+  "image": "https://mechanic-frontend-smoky.vercel.app/public/logo3.png",
   "telephone": "+91 88070 86727"
 };
 
@@ -190,25 +190,22 @@ export default function HomePage() {
                     <Wrench className="w-5 h-5" />
                     {t.hero.bookNow}
                   </Link>
-                  <Link href="/booking/status" className="btn-secondary text-base px-8 py-4">
+                  {/* <Link href="/booking/status" className="btn-secondary text-base px-8 py-4">
                     {t.hero.trackBooking}
                     <ArrowRight className="w-5 h-5" />
-                  </Link>
+                  </Link> */}
+                  <a
+  href="tel:+918807086727"
+  className="btn-secondary bg-black text-white px-8 py-4"
+>
+  Call Now
+  <ArrowRight className="w-5 h-5" />
+</a>
                 </div>
 
                 {/* Social proof row */}
                 <div className="flex items-center gap-6">
-                  {/* <div className="flex -space-x-3">
-                    {['bg-amber-400', 'bg-blue-400', 'bg-green-400', 'bg-purple-400'].map((c, i) => (
-                      <div
-                        key={i}
-                        className={`w-10 h-10 rounded-full ${c} border-2 border-white flex items-center justify-center text-white text-xs font-bold`}
-                      >
-                        {String.fromCharCode(65 + i)}
-                      </div>
-                    ))}
-                  </div> */}
-
+                 
                   <a
                     href="https://maps.app.goo.gl/cM7MmZp8w7pD7Ut39"
                     target="_blank"
@@ -351,10 +348,13 @@ export default function HomePage() {
               ))}
             </div>
             <div className="text-center mt-10">
-              <Link href="/services" className="btn-outline">
-                {lang === 'ta' ? 'அனைத்து சேவைகளையும் பார்க்க' : 'View All Services'}
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+              <p>
+               All service listed?{' '}
+                <a href="tel:+918807086727" className="text-amber-600 font-semibold hover:underline">
+                  Call us
+                </a>{' '}
+                — we may still be able to help.
+              </p>
             </div>
           </div>
         </section>
@@ -481,7 +481,7 @@ export default function HomePage() {
         </section>
 
         {/* ── FAQ ── */}
-        <section className="py-20 bg-white">
+        {/* <section className="py-20 bg-white">
           <div className="max-w-4xl mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-10">
               Frequently Asked Questions
@@ -513,7 +513,88 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
+        <section className="py-20 bg-gray-50">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Heading */}
+    <div className="text-center mb-14">
+      <h2 className="text-4xl font-bold text-gray-900">
+        Frequently Asked Questions
+      </h2>
+      <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+        Find answers to the most common questions about our AC, Refrigerator,
+        Washing Machine and TV repair services.
+      </p>
+    </div>
+
+    {/* FAQ Grid */}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm hover:shadow-xl hover:border-amber-400 transition-all duration-300">
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">
+          How much does AC repair cost in Theni?
+        </h3>
+        <p className="text-gray-600 leading-7">
+          AC repair starts from ₹500 depending on the issue and spare parts.
+        </p>
+      </div>
+
+      <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm hover:shadow-xl hover:border-amber-400 transition-all duration-300">
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">
+          Do you provide same-day home service?
+        </h3>
+        <p className="text-gray-600 leading-7">
+          Yes. Same-day doorstep service is available in most areas of Theni.
+        </p>
+      </div>
+
+      <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm hover:shadow-xl hover:border-amber-400 transition-all duration-300">
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">
+          Which appliances do you repair?
+        </h3>
+        <p className="text-gray-600 leading-7">
+          We repair AC, Refrigerator, Washing Machine and LED/Smart TVs.
+        </p>
+      </div>
+
+      <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm hover:shadow-xl hover:border-amber-400 transition-all duration-300">
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">
+          Do you provide service warranty?
+        </h3>
+        <p className="text-gray-600 leading-7">
+          Yes. Warranty is available on eligible repair services.
+        </p>
+      </div>
+
+      <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm hover:shadow-xl hover:border-amber-400 transition-all duration-300">
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">
+          Do you provide AC service in Madurai?
+        </h3>
+        <p className="text-gray-600 leading-7">
+          Yes, we provide same-day doorstep AC service in Madurai for all
+          brands including LG, Voltas, Samsung and Blue Star.
+        </p>
+      </div>
+
+      <div className="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm hover:shadow-xl hover:border-amber-400 transition-all duration-300">
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">
+          What is your AC service contact number?
+        </h3>
+        <p className="text-gray-600 leading-7">
+          You can reach us at{" "}
+          <a
+            href="tel:+918807086727"
+            className="text-amber-500 font-semibold hover:underline"
+          >
+            +91 88070 86727
+          </a>{" "}
+          for AC service in Theni, Madurai and Dindigul.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
 
         {/* ── Areas We Serve ── */}
         <section className="py-20 bg-gray-50">

@@ -203,13 +203,13 @@ export default function ServiceCard({ service, showFullDesc }: Props) {
         <div className="text-sm">
           {service.price_from ? (
             <>
-              <span className="text-xs text-gray-400">From </span>
+              {/* <span className="text-xs text-gray-400">From </span>
               <span className="text-amber-600 font-bold">
                 ₹{service.price_from.toLocaleString()}
               </span>
               {service.price_to ? (
                 <span className="text-gray-400"> – ₹{service.price_to.toLocaleString()}</span>
-              ) : null}
+              ) : null} */}
             </>
           ) : (
             <span className="text-gray-400 text-xs">Call for price</span>
