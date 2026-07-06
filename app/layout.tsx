@@ -56,7 +56,7 @@ const faqJsonLd = {
       "name": "How much does AC repair cost in Theni?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Our AC repair service starts from ₹500. The final cost depends on the issue and spare parts required."
+        "text": "Our AC repair service . The final cost depends on the issue and spare parts required."
       }
     },
     {

@@ -80,7 +80,7 @@ export const translations = {
       missionText: 'To deliver world-class home appliance repair services with transparency, quality, and a smile — making every home comfortable again.',
       values: 'Our Values',
       serviceAreas: 'Service Areas',
-      serviceAreaList: ['Coimbatore', 'Tiruppur', 'Erode', 'Salem', 'Pollachi', 'Mettupalayam'],
+      serviceAreaList: ["Theni","Madurai","Dindigul"],
       team: 'Our Expert Team',
       teamText: 'Our team of certified technicians is trained to handle all major appliance brands including LG, Samsung, Whirlpool, Voltas, Daikin, Godrej, and more.',
     },
