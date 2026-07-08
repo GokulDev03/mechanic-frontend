@@ -9,15 +9,67 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ['latin'] });
 
+// const jsonLd = {
+//   "@context": "https://schema.org",
+//   "@type": "LocalBusiness",
+//   name: "A S SERVICE",
+//  description:
+// "Professional AC, Refrigerator, Washing Machine and TV repair services in Theni, Madurai and Dindigul. Same-day doorstep service for LG, Samsung, Voltas, Daikin, Blue Star and all major brands.",
+//   url: "https://mechanic-frontend-smoky.vercel.app",
+//   image: "https://mechanic-frontend-smoky.vercel.app/og-image.jpg",
+//   telephone: "+91 88070 86727",
+//   address: {
+//     "@type": "PostalAddress",
+//     addressLocality: "Theni",
+//     addressRegion: "Tamil Nadu",
+//     postalCode: "625531",
+//     addressCountry: "IN",
+//   },
+//   sameAs: [],
+//   areaServed: [
+//     "Theni",
+//     "Periyakulam",
+//     "Andipatti",
+//     "Bodinayakanur",
+//     "Cumbum",
+//     "Uthamapalayam",
+//     "Madurai",
+//     "Melur",
+//     "Usilampatti",
+//     "Thirumangalam",
+//     "Dindigul",
+//     "Palani",
+//     "Kodaikanal",
+//     "Oddanchatram",
+//     "Vedasandur",
+//     "Natham",
+//   ],
+//   openingHours: "Mo-Su 08:00-20:00",
+//   priceRange: "₹₹",
+// };
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+
+  "@id": "https://mechanic-frontend-smoky.vercel.app/#business",
+
   name: "A S SERVICE",
- description:
-    "Professional AC, Refrigerator, Washing Machine and TV repair services in Theni, Madurai and Dindigul. We service all brands including LG, Voltas, Samsung, Blue Star and Daikin.",
+
+  description:
+    "Professional AC, Refrigerator, Washing Machine and TV repair services in Theni, Madurai and Dindigul.",
+
   url: "https://mechanic-frontend-smoky.vercel.app",
+
   image: "https://mechanic-frontend-smoky.vercel.app/og-image.jpg",
-  telephone: "+919025649921",
+
+  logo: "https://mechanic-frontend-smoky.vercel.app/logo3.png",
+
+  telephone: "+918807086727",
+
+  email: "affra.service@gmail.com",
+  
+
   address: {
     "@type": "PostalAddress",
     addressLocality: "Theni",
@@ -25,27 +77,53 @@ const jsonLd = {
     postalCode: "625531",
     addressCountry: "IN",
   },
+
   sameAs: [],
+
   areaServed: [
     "Theni",
-    "Periyakulam",
-    "Andipatti",
-    "Bodinayakanur",
-    "Cumbum",
-    "Uthamapalayam",
     "Madurai",
-    "Melur",
-    "Usilampatti",
-    "Thirumangalam",
     "Dindigul",
-    "Palani",
-    "Kodaikanal",
-    "Oddanchatram",
-    "Vedasandur",
-    "Natham",
   ],
+
   openingHours: "Mo-Su 08:00-20:00",
+
   priceRange: "₹₹",
+
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Home Appliance Repair Services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "AC Repair",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Refrigerator Repair",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Washing Machine Repair",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "TV Repair",
+        },
+      },
+    ],
+  },
 };
 const faqJsonLd = {
   "@context": "https://schema.org",

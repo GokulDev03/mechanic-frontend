@@ -8,24 +8,24 @@ const WHATSAPP = "918807086727";     // WhatsApp number (no +)
 // =============================================================
 
 export const metadata: Metadata = {
-  title: "Washing Machine Repair in Theni | Same Day Doorstep Service",
+  title: "Fridge Repair in Theni | Refrigerator Service at Your Doorstep",
   description:
-    "Washing machine repair in Theni – front load, top load & semi-automatic. Not spinning, not draining, motor & PCB faults fixed at your home. LG, Samsung, IFB & all brands. Call A S SERVICE.",
+    "Fridge repair in Theni – not cooling, gas filling, compressor & thermostat faults fixed at home. Single door, double door & side-by-side refrigerator service for LG, Samsung, Whirlpool & all brands.",
   keywords: [
-    "washing machine repair theni",
-    "washing machine service theni",
-    "lg washing machine service theni",
-    "samsung washing machine service theni",
-    "ifb washing machine service theni",
-    "front load washing machine repair theni",
+    "fridge repair theni",
+    "refrigerator service theni",
+    "fridge service theni",
+    "refrigerator repair theni",
+    "samsung refrigerator service theni",
+    "lg fridge service theni",
+    "fridge gas filling theni",
   ],
-  alternates: { canonical: "/washing-machine-repair-theni" },
-
+  alternates: { canonical: "/fridge-repair-theni" },
   openGraph: {
-  title: "Washing Machine Repair in Theni | Doorstep Service",
+  title: "Fridge Repair in Theni | Refrigerator Service at Your Doorstep",
   description:
-    "Professional washing machine repair in Theni. Fully automatic, semi automatic, front load and top load service.",
-  url: "https://yourdomain.com/washing-machine-repair-theni",
+    "Professional fridge repair in Theni. Gas filling, compressor repair, thermostat replacement and doorstep refrigerator service.",
+  url: "https://mechanic-frontend-smoky.vercel.app/fridge-repair-theni",
   siteName: "A S SERVICE",
   locale: "en_IN",
   type: "website",
@@ -38,26 +38,26 @@ const faqJsonLd = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "How much does washing machine repair cost in Theni?",
+      name: "Why is my fridge not cooling in Theni?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Washing machine repairs in Theni start from around ₹400 depending on the fault. Our technician inspects the machine free at your home and gives the full price before starting.",
+        text: "The usual causes are low refrigerant gas, a faulty compressor relay, a failed thermostat or blocked airflow. Our technician diagnoses the exact fault at your home in Theni before quoting.",
       },
     },
     {
       "@type": "Question",
-      name: "Do you repair front load washing machines in Theni?",
+      name: "How much does refrigerator gas filling cost in Theni?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. We repair front load, top load and semi-automatic machines of all brands — LG, Samsung, IFB, Whirlpool, Bosch and more.",
+        text: "Fridge gas filling in Theni typically ranges from ₹1200–₹2500 depending on the model and gas type, always with leak testing included. Exact price is confirmed after free inspection.",
       },
     },
     {
       "@type": "Question",
-      name: "My washing machine is not spinning. Can you fix it at home?",
+      name: "Do you repair double door and inverter refrigerators?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "In most cases yes. Spin problems are usually caused by a worn belt, faulty motor, door lock or clogged drain — all of which we repair at your doorstep in Theni the same day.",
+        text: "Yes — single door, double door, side-by-side and inverter refrigerators of all brands including LG, Samsung, Whirlpool, Godrej and Haier.",
       },
     },
   ],
@@ -76,8 +76,8 @@ const breadcrumbJsonLd = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "Washing Machine Repair Theni",
-      item: "https://mechanic-frontend-smoky.vercel.app/washing-machine-repair-theni",
+      name: "Fridge Repair Theni",
+      item: "https://mechanic-frontend-smoky.vercel.app/fridge-repair-theni",
     },
   ],
 };
@@ -85,7 +85,7 @@ const breadcrumbJsonLd = {
 const serviceJsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Washing Machine Repair Service in Theni",
+  name: "Fridge & Refrigerator Repair Service in Theni",
   provider: {
     "@type": "LocalBusiness",
     name: "A S SERVICE",
@@ -98,8 +98,8 @@ const serviceJsonLd = {
     },
   },
   areaServed: ["Theni", "Periyakulam", "Bodinayakanur", "Cumbum", "Chinnamanur", "Andipatti"],
-  serviceType: "Washing Machine Repair",
-  url: "https://mechanic-frontend-smoky.vercel.app/washing-machine-repair-theni",
+  serviceType: "Refrigerator Repair",
+  url: "https://mechanic-frontend-smoky.vercel.app/fridge-repair-theni",
 };
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
@@ -124,34 +124,34 @@ const localBusinessJsonLd = {
 };
 
 const services = [
-  { title: "Not Spinning / Not Draining", desc: "Worn belts, blocked drain pumps, faulty door locks and motor issues — the most common faults, fixed at your home." },
-  { title: "Front Load Repair", desc: "Drum noise, door seal leaks, error codes and PCB faults on front load machines of every brand." },
-  { title: "Top Load & Semi-Automatic", desc: "Pulsator problems, timer faults, water inlet issues and spin tub repairs for top load and semi-automatic models." },
-  { title: "Motor & PCB Repair", desc: "Burnt motors rewound or replaced, and control board faults diagnosed and repaired — with genuine parts." },
-  { title: "Installation & Demo", desc: "New machine installation with inlet/outlet fitting, levelling, and a demo so you know every function." },
-  { title: "General Service", desc: "Full internal cleaning — drum, filter and drain — removes detergent build-up, smells and improves wash quality." },
+  { title: "Fridge Not Cooling", desc: "Low gas, compressor relay faults, thermostat failure or blocked vents — the exact cause found and fixed at your home." },
+  { title: "Gas Filling & Leak Repair", desc: "Refrigerant gas charging with proper leak detection first, so your refrigerator doesn't lose cooling again in weeks." },
+  { title: "Compressor Repair", desc: "Compressor not starting, tripping or making noise — relay, capacitor and compressor replacement with genuine parts." },
+  { title: "Double Door & Side-by-Side", desc: "Frost build-up, defrost timer faults, fan motor and sensor issues on double door and side-by-side refrigerators." },
+  { title: "Door Gasket & Water Leakage", desc: "Torn door seals and water pooling inside or under the fridge — small fixes that prevent big cooling loss." },
+  { title: "Inverter Fridge Repair", desc: "PCB-level diagnosis and repair on inverter refrigerators of every brand — LG, Samsung, Whirlpool and more." },
 ];
 
-const brands = ["LG", "Samsung", "IFB", "Whirlpool", "Bosch", "Godrej", "Haier", "Panasonic", "Onida", "Lloyd", "Videocon"];
+const brands = ["LG", "Samsung", "Whirlpool", "Godrej", "Haier", "Bosch", "Panasonic", "Hitachi", "Voltas Beko", "Kelvinator", "Videocon"];
 
 const areas = ["Theni Allinagaram", "Periyakulam", "Bodinayakanur", "Cumbum", "Chinnamanur", "Andipatti", "Veerapandi", "Devaram"];
 
 const steps = [
-  { title: "Call or WhatsApp", desc: "Tell us the machine type, brand and problem." },
+  { title: "Call or WhatsApp", desc: "Tell us the fridge type, brand and the problem." },
   { title: "Technician Visits", desc: "Same-day doorstep visit anywhere in Theni." },
   { title: "Upfront Quote", desc: "Free inspection, exact price before any work." },
-  { title: "Repair & Warranty", desc: "Fixed on the spot in most cases, with warranty." },
+  { title: "Repair & Warranty", desc: "Fixed at your home, backed by service warranty." },
 ];
 
 const faqs = [
-  { q: "How much does washing machine repair cost in Theni?", a: "Most repairs start from ₹400 depending on the fault and spare parts needed. The technician checks the machine free at your home and tells you the exact cost before starting — no hidden charges." },
-  { q: "My machine is not draining water. What's the reason?", a: "Usually a clogged drain filter, blocked drain pipe or a failed drain pump. It's one of the most common calls we get in Theni, and in most cases it's fixed within one visit." },
-  { q: "Do you repair front load machines at home, or take them to a shop?", a: "Almost all front load repairs — including drum, motor and PCB work — are done at your home. Only in rare cases does a machine need workshop repair, and we tell you before taking it." },
-  { q: "Which brands do you service?", a: "LG, Samsung, IFB, Whirlpool, Bosch, Godrej, Haier, Panasonic and all other major brands, both old and new models." },
-  { q: "Is the repair covered by warranty?", a: "Yes — every repair comes with a service warranty. If the same fault returns within the period, we fix it again at no charge." },
+  { q: "Why is my fridge not cooling properly?", a: "The most common causes are low refrigerant gas, a failed compressor relay or thermostat, and blocked air vents from frost build-up. Our technician checks your refrigerator at home in Theni and tells you the exact fault before quoting." },
+  { q: "How much does fridge gas filling cost in Theni?", a: "Typically ₹1200–₹2500 depending on the fridge size and gas type. We always test for leaks before filling — otherwise the new gas escapes within weeks and you pay twice." },
+  { q: "The fridge is running but freezing everything / cooling too much. Can that be fixed?", a: "Yes — over-cooling is usually a thermostat or sensor fault, one of the cheaper repairs. It's worth fixing quickly since it spoils vegetables and raises your electricity bill." },
+  { q: "Do you repair refrigerators at home or take them to a workshop?", a: "Almost all repairs — gas filling, compressor, thermostat, gasket — are done at your home in Theni. If workshop repair is ever needed, we tell you first." },
+  { q: "Is there a warranty on refrigerator repairs?", a: "Yes, every repair carries a service warranty. If the same fault returns within the period, we fix it free of charge." },
 ];
 
-export default function WashingMachineRepairTheniPage() {
+export default function FridgeRepairTheniPage() {
   return (
     <main className="bg-[#f4f9fb] text-[#14303c] pb-20 md:pb-0">
       {/* signature temperature strip: hot → cold */}
@@ -184,7 +184,7 @@ export default function WashingMachineRepairTheniPage() {
             <ol className="flex items-center gap-1.5">
               <li><Link href="/" className="hover:text-[#0e7c9c]">Home</Link></li>
               <li>/</li>
-              <li className="font-bold text-[#14303c]">Washing Machine Repair Theni</li>
+              <li className="font-bold text-[#14303c]">Fridge Repair Theni</li>
             </ol>
           </nav>
 
@@ -193,11 +193,11 @@ export default function WashingMachineRepairTheniPage() {
           </span>
 
           <h1 className="text-3xl md:text-[2.7rem] font-extrabold tracking-tight leading-[1.15] max-w-2xl">
-            Washing Machine Repair in <span className="text-[#0e7c9c]">Theni</span> — Same Day Doorstep Visit
+            Fridge Repair in <span className="text-[#0e7c9c]">Theni</span> — Refrigerator Service at Your Doorstep
           </h1>
 
           <p className="mt-4 max-w-xl text-[1.05rem] text-[#3c5560] leading-7">
-            Front load, top load or semi-automatic — if your washing machine is not spinning, not draining, leaking or making noise, our technicians repair it at your home in Theni, usually in a single visit.
+            Fridge not cooling? Making noise? Leaking water? Our technicians repair single door, double door and side-by-side refrigerators at your home in Theni — gas filling, compressor and thermostat faults included.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-3">
@@ -208,7 +208,7 @@ export default function WashingMachineRepairTheniPage() {
               📞 Call for Free Inspection
             </a>
             <a
-              href={`https://wa.me/${WHATSAPP}?text=Hi, I need washing machine repair in Theni`}
+              href={`https://wa.me/${WHATSAPP}?text=Hi, I need fridge repair in Theni`}
               className="inline-flex items-center gap-2 bg-white text-[#14303c] font-bold px-6 py-3.5 rounded-2xl border-2 border-[#cfe2e9]"
             >
               💬 WhatsApp Us
@@ -228,9 +228,9 @@ export default function WashingMachineRepairTheniPage() {
 
       {/* ============ SERVICES ============ */}
       <section className="max-w-5xl mx-auto px-5 py-11">
-        <h2 className="text-2xl md:text-[1.7rem] font-extrabold tracking-tight mb-2">Our Washing Machine Services in Theni</h2>
+        <h2 className="text-2xl md:text-[1.7rem] font-extrabold tracking-tight mb-2">Our Refrigerator Services in Theni</h2>
         <p className="text-[#3c5560] max-w-xl mb-6">
-          Whatever has gone wrong with your machine, we diagnose it at your doorstep, quote before we start, and finish most repairs the same day.
+          A fridge failure can spoil a week&apos;s groceries in a day — so we treat it as urgent. Doorstep diagnosis, upfront price, and most repairs done the same visit.
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {services.map((s) => (
@@ -245,7 +245,7 @@ export default function WashingMachineRepairTheniPage() {
       {/* ============ BRANDS ============ */}
       <section className="max-w-5xl mx-auto px-5 pb-11">
         <h2 className="text-2xl md:text-[1.7rem] font-extrabold tracking-tight mb-2">All Brands, All Models</h2>
-        <p className="text-[#3c5560] mb-6">From old semi-automatics to the newest inverter front loads:</p>
+        <p className="text-[#3c5560] mb-6">Every refrigerator brand found in Tamil Nadu homes:</p>
         <div className="flex flex-wrap gap-2.5">
           {brands.map((b) => (
             <span key={b} className="bg-white border border-[#cfe2e9] rounded-full px-5 py-2 text-sm font-semibold">{b}</span>
@@ -257,7 +257,7 @@ export default function WashingMachineRepairTheniPage() {
       <section className="bg-[#e2eff4] border-y border-[#cfe2e9]">
         <div className="max-w-5xl mx-auto px-5 py-11">
           <h2 className="text-2xl md:text-[1.7rem] font-extrabold tracking-tight mb-2">Areas We Cover in Theni District</h2>
-          <p className="text-[#3c5560] mb-6">Doorstep washing machine repair across Theni and nearby towns:</p>
+          <p className="text-[#3c5560] mb-6">Doorstep fridge repair across Theni and nearby towns:</p>
           <div className="flex flex-wrap gap-2.5">
             {areas.map((a) => (
               <span key={a} className="bg-white border border-[#cfe2e9] rounded-lg px-3.5 py-1.5 text-sm font-medium">{a}</span>
@@ -302,7 +302,7 @@ export default function WashingMachineRepairTheniPage() {
       <div className="max-w-5xl mx-auto px-5 pb-11">
         <div className="bg-[#0a5a72] text-white text-center rounded-2xl px-6 py-9">
           <h2 className="text-2xl md:text-[1.7rem] font-extrabold tracking-tight">
-            Washing Machine Trouble in Theni? We&apos;re One Call Away.
+            Fridge Trouble in Theni? We&apos;re One Call Away.
           </h2>
           <p className="opacity-85 mt-1.5 mb-5">Same-day doorstep service · All brands · Transparent pricing</p>
           <a
@@ -318,10 +318,10 @@ export default function WashingMachineRepairTheniPage() {
       <footer className="bg-[#0d2530] text-[#a9c6d1] text-sm">
         <div className="max-w-5xl mx-auto px-5 py-7 text-center">
           <p className="flex flex-wrap justify-center gap-x-4 gap-y-1.5">
-            <Link href="/washing-machine-repair-madurai" className="text-white hover:underline">Washing Machine Repair Madurai</Link>
-            <Link href="/washing-machine-repair-dindigul" className="text-white hover:underline">Washing Machine Repair Dindigul</Link>
+            <Link href="/fridge-repair-madurai" className="text-white hover:underline">Fridge Repair Madurai</Link>
+            <Link href="/fridge-repair-dindigul" className="text-white hover:underline">Fridge Repair Dindigul</Link>
             <Link href="/ac-repair-theni" className="text-white hover:underline">AC Repair Theni</Link>
-            <Link href="/fridge-repair-theni" className="text-white hover:underline">Fridge Repair Theni</Link>
+            <Link href="/washing-machine-repair-theni" className="text-white hover:underline">Washing Machine Repair Theni</Link>
           </p>
           <p className="mt-2.5">© 2026 A S SERVICE · Theni, Tamil Nadu</p>
         </div>
@@ -333,7 +333,7 @@ export default function WashingMachineRepairTheniPage() {
           📞 Call Now
         </a>
         <a
-          href={`https://wa.me/${WHATSAPP}?text=Hi, I need washing machine repair in Theni`}
+          href={`https://wa.me/${WHATSAPP}?text=Hi, I need fridge repair in Theni`}
           className="flex-1 bg-[#075e54] text-white text-center font-extrabold py-4"
         >
           💬 WhatsApp

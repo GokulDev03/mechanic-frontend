@@ -8,24 +8,24 @@ const WHATSAPP = "918807086727";     // WhatsApp number (no +)
 // =============================================================
 
 export const metadata: Metadata = {
-  title: "Washing Machine Repair in Theni | Same Day Doorstep Service",
+  title: "Fridge Repair in Madurai | Refrigerator Service at Your Doorstep",
   description:
-    "Washing machine repair in Theni – front load, top load & semi-automatic. Not spinning, not draining, motor & PCB faults fixed at your home. LG, Samsung, IFB & all brands. Call A S SERVICE.",
+    "Refrigerator repair in Madurai – not cooling, gas filling, compressor & PCB faults fixed at home. Single door, double door & side-by-side fridge service for Samsung, LG, Whirlpool & all brands.",
   keywords: [
-    "washing machine repair theni",
-    "washing machine service theni",
-    "lg washing machine service theni",
-    "samsung washing machine service theni",
-    "ifb washing machine service theni",
-    "front load washing machine repair theni",
+    "fridge repair madurai",
+    "refrigerator service madurai",
+    "fridge service madurai",
+    "refrigerator repair madurai",
+    "samsung refrigerator service madurai",
+    "lg fridge service madurai",
+    "fridge gas filling madurai",
   ],
-  alternates: { canonical: "/washing-machine-repair-theni" },
-
+  alternates: { canonical: "/fridge-repair-madurai" },
   openGraph: {
-  title: "Washing Machine Repair in Theni | Doorstep Service",
+  title: "Fridge Repair in madurai | Refrigerator Service at Your Doorstep",
   description:
-    "Professional washing machine repair in Theni. Fully automatic, semi automatic, front load and top load service.",
-  url: "https://yourdomain.com/washing-machine-repair-theni",
+    "Professional fridge repair in madurai. Gas filling, compressor repair, thermostat replacement and doorstep refrigerator service.",
+  url: "https://mechanic-frontend-smoky.vercel.app/fridge-repair-madurai",
   siteName: "A S SERVICE",
   locale: "en_IN",
   type: "website",
@@ -38,26 +38,26 @@ const faqJsonLd = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "How much does washing machine repair cost in Theni?",
+      name: "What is the cost of fridge repair in Madurai?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Washing machine repairs in Theni start from around ₹400 depending on the fault. Our technician inspects the machine free at your home and gives the full price before starting.",
+        text: "Minor refrigerator repairs in Madurai start around ₹400–₹600, gas filling runs ₹1200–₹2500, and compressor work is quoted after inspection. The technician confirms the full price at your home before starting.",
       },
     },
     {
       "@type": "Question",
-      name: "Do you repair front load washing machines in Theni?",
+      name: "My refrigerator is not cooling but the light is on. What's wrong?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes. We repair front load, top load and semi-automatic machines of all brands — LG, Samsung, IFB, Whirlpool, Bosch and more.",
+        text: "If the light works but cooling has stopped, the likely causes are a gas leak, a failed compressor relay, or a defrost system fault in frost-free models. We diagnose the exact cause at your doorstep in Madurai.",
       },
     },
     {
       "@type": "Question",
-      name: "My washing machine is not spinning. Can you fix it at home?",
+      name: "Do you provide same-day refrigerator service in Madurai?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "In most cases yes. Spin problems are usually caused by a worn belt, faulty motor, door lock or clogged drain — all of which we repair at your doorstep in Theni the same day.",
+        text: "Yes — a fridge breakdown spoils food fast, so we prioritise same-day visits across Madurai city including Anna Nagar, KK Nagar, Thirunagar and nearby areas.",
       },
     },
   ],
@@ -76,8 +76,8 @@ const breadcrumbJsonLd = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "Washing Machine Repair Theni",
-      item: "https://mechanic-frontend-smoky.vercel.app/washing-machine-repair-theni",
+      name: "Fridge Repair Madurai",
+      item: "https://mechanic-frontend-smoky.vercel.app/fridge-repair-madurai",
     },
   ],
 };
@@ -85,21 +85,21 @@ const breadcrumbJsonLd = {
 const serviceJsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Washing Machine Repair Service in Theni",
+  name: "Fridge & Refrigerator Repair Service in Madurai",
   provider: {
     "@type": "LocalBusiness",
     name: "A S SERVICE",
     telephone: PHONE,
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Theni",
+      addressLocality: "Madurai",
       addressRegion: "Tamil Nadu",
       addressCountry: "IN",
     },
   },
-  areaServed: ["Theni", "Periyakulam", "Bodinayakanur", "Cumbum", "Chinnamanur", "Andipatti"],
-  serviceType: "Washing Machine Repair",
-  url: "https://mechanic-frontend-smoky.vercel.app/washing-machine-repair-theni",
+  areaServed: ["Madurai", "Anna Nagar", "KK Nagar", "Thirunagar", "Villapuram", "Thiruparankundram", "Othakadai"],
+  serviceType: "Refrigerator Repair",
+  url: "https://mechanic-frontend-smoky.vercel.app/fridge-repair-madurai",
 };
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
@@ -109,49 +109,49 @@ const localBusinessJsonLd = {
   telephone: "+918807086727",
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Theni",
+    addressLocality: "Madurai",
     addressRegion: "Tamil Nadu",
     addressCountry: "IN",
   },
   areaServed: [
-    "Theni",
-    "Periyakulam",
-    "Bodinayakanur",
-    "Cumbum",
-    "Chinnamanur",
-    "Andipatti"
+    "Madurai",
+    "Anna Nagar",
+    "KK Nagar",
+    "Tallakulam",
+    "Melur",
+    "Thiruparankundram"
   ]
 };
 
 const services = [
-  { title: "Not Spinning / Not Draining", desc: "Worn belts, blocked drain pumps, faulty door locks and motor issues — the most common faults, fixed at your home." },
-  { title: "Front Load Repair", desc: "Drum noise, door seal leaks, error codes and PCB faults on front load machines of every brand." },
-  { title: "Top Load & Semi-Automatic", desc: "Pulsator problems, timer faults, water inlet issues and spin tub repairs for top load and semi-automatic models." },
-  { title: "Motor & PCB Repair", desc: "Burnt motors rewound or replaced, and control board faults diagnosed and repaired — with genuine parts." },
-  { title: "Installation & Demo", desc: "New machine installation with inlet/outlet fitting, levelling, and a demo so you know every function." },
-  { title: "General Service", desc: "Full internal cleaning — drum, filter and drain — removes detergent build-up, smells and improves wash quality." },
+  { title: "Fridge Not Cooling", desc: "Light on but no cooling? Gas leaks, relay failures and defrost faults on frost-free models — found and fixed at home." },
+  { title: "Gas Filling & Leak Repair", desc: "Refrigerant charging done right: leak test first, then filling — so you don't call us again next month for the same fridge." },
+  { title: "Compressor Repair", desc: "Clicking sounds, tripping, or a compressor that won't start — relay, capacitor and compressor replacement with genuine spares." },
+  { title: "Double Door & Side-by-Side", desc: "Freezer works but fridge section doesn't? Defrost timers, fan motors and damper faults on double door and side-by-side models." },
+  { title: "Door Gasket & Water Leakage", desc: "Loose door seals and water collecting under the vegetable tray — quick repairs that stop cooling loss and higher power bills." },
+  { title: "Inverter Fridge Repair", desc: "Board-level PCB diagnosis and repair on inverter refrigerators — Samsung Digital Inverter, LG Smart Inverter and others." },
 ];
 
-const brands = ["LG", "Samsung", "IFB", "Whirlpool", "Bosch", "Godrej", "Haier", "Panasonic", "Onida", "Lloyd", "Videocon"];
+const brands = ["LG", "Samsung", "Whirlpool", "Godrej", "Haier", "Bosch", "Panasonic", "Hitachi", "Voltas Beko", "Kelvinator", "Videocon"];
 
-const areas = ["Theni Allinagaram", "Periyakulam", "Bodinayakanur", "Cumbum", "Chinnamanur", "Andipatti", "Veerapandi", "Devaram"];
+const areas = ["Anna Nagar", "KK Nagar", "Thirunagar", "Villapuram", "Mattuthavani", "Goripalayam", "Simmakkal", "Iyer Bungalow", "Thiruparankundram", "Othakadai", "Avaniyapuram", "Pasumalai"];
 
 const steps = [
-  { title: "Call or WhatsApp", desc: "Tell us the machine type, brand and problem." },
-  { title: "Technician Visits", desc: "Same-day doorstep visit anywhere in Theni." },
-  { title: "Upfront Quote", desc: "Free inspection, exact price before any work." },
-  { title: "Repair & Warranty", desc: "Fixed on the spot in most cases, with warranty." },
+  { title: "Call or WhatsApp", desc: "Tell us the brand, door type and the symptom." },
+  { title: "Technician Visits", desc: "Priority same-day visit across Madurai city." },
+  { title: "Upfront Quote", desc: "Free diagnosis, then the exact price to approve." },
+  { title: "Repair & Warranty", desc: "Repaired at home, with warranty on the work." },
 ];
 
 const faqs = [
-  { q: "How much does washing machine repair cost in Theni?", a: "Most repairs start from ₹400 depending on the fault and spare parts needed. The technician checks the machine free at your home and tells you the exact cost before starting — no hidden charges." },
-  { q: "My machine is not draining water. What's the reason?", a: "Usually a clogged drain filter, blocked drain pipe or a failed drain pump. It's one of the most common calls we get in Theni, and in most cases it's fixed within one visit." },
-  { q: "Do you repair front load machines at home, or take them to a shop?", a: "Almost all front load repairs — including drum, motor and PCB work — are done at your home. Only in rare cases does a machine need workshop repair, and we tell you before taking it." },
-  { q: "Which brands do you service?", a: "LG, Samsung, IFB, Whirlpool, Bosch, Godrej, Haier, Panasonic and all other major brands, both old and new models." },
-  { q: "Is the repair covered by warranty?", a: "Yes — every repair comes with a service warranty. If the same fault returns within the period, we fix it again at no charge." },
+  { q: "What does fridge repair cost in Madurai?", a: "Minor repairs like thermostats and relays start around ₹400–₹600. Gas filling is typically ₹1200–₹2500 depending on fridge size. Compressor jobs cost more and are always quoted after free inspection at your home." },
+  { q: "The freezer works but the bottom fridge section is warm. Why?", a: "That's a classic frost-free fault — usually a blocked air vent, failed defrost heater or damper problem. Common in double door models, and repairable at your home in Madurai." },
+  { q: "How fast can you come? My food will spoil.", a: "We treat fridge calls as urgent. In most Madurai areas a technician reaches the same day, often within hours. Meanwhile, keep the doors closed — food stays safe for several hours that way." },
+  { q: "Is it worth repairing an old refrigerator, or should I buy new?", a: "If the body and compressor are sound, repair is usually far cheaper than replacement. Our technician gives you an honest assessment — if a repair isn't worth the money, we'll say so." },
+  { q: "Do you give warranty on refrigerator repairs?", a: "Yes — every repair comes with a service warranty. Same fault within the period? We return and fix it at no cost." },
 ];
 
-export default function WashingMachineRepairTheniPage() {
+export default function FridgeRepairMaduraiPage() {
   return (
     <main className="bg-[#f4f9fb] text-[#14303c] pb-20 md:pb-0">
       {/* signature temperature strip: hot → cold */}
@@ -184,20 +184,20 @@ export default function WashingMachineRepairTheniPage() {
             <ol className="flex items-center gap-1.5">
               <li><Link href="/" className="hover:text-[#0e7c9c]">Home</Link></li>
               <li>/</li>
-              <li className="font-bold text-[#14303c]">Washing Machine Repair Theni</li>
+              <li className="font-bold text-[#14303c]">Fridge Repair Madurai</li>
             </ol>
           </nav>
 
           <span className="inline-block bg-[#0e7c9c] text-white text-[0.72rem] font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-4">
-            Doorstep Service in Theni
+            Doorstep Service in Madurai
           </span>
 
           <h1 className="text-3xl md:text-[2.7rem] font-extrabold tracking-tight leading-[1.15] max-w-2xl">
-            Washing Machine Repair in <span className="text-[#0e7c9c]">Theni</span> — Same Day Doorstep Visit
+            Fridge Repair in <span className="text-[#0e7c9c]">Madurai</span> — Refrigerator Service at Your Doorstep
           </h1>
 
           <p className="mt-4 max-w-xl text-[1.05rem] text-[#3c5560] leading-7">
-            Front load, top load or semi-automatic — if your washing machine is not spinning, not draining, leaking or making noise, our technicians repair it at your home in Theni, usually in a single visit.
+            A warm fridge in Madurai weather means spoiled food by evening — so we move fast. Single door, double door, side-by-side and inverter refrigerators repaired at your home, from gas filling to compressor replacement.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-3">
@@ -208,7 +208,7 @@ export default function WashingMachineRepairTheniPage() {
               📞 Call for Free Inspection
             </a>
             <a
-              href={`https://wa.me/${WHATSAPP}?text=Hi, I need washing machine repair in Theni`}
+              href={`https://wa.me/${WHATSAPP}?text=Hi, I need fridge repair in Madurai`}
               className="inline-flex items-center gap-2 bg-white text-[#14303c] font-bold px-6 py-3.5 rounded-2xl border-2 border-[#cfe2e9]"
             >
               💬 WhatsApp Us
@@ -228,9 +228,9 @@ export default function WashingMachineRepairTheniPage() {
 
       {/* ============ SERVICES ============ */}
       <section className="max-w-5xl mx-auto px-5 py-11">
-        <h2 className="text-2xl md:text-[1.7rem] font-extrabold tracking-tight mb-2">Our Washing Machine Services in Theni</h2>
+        <h2 className="text-2xl md:text-[1.7rem] font-extrabold tracking-tight mb-2">Our Refrigerator Services in Madurai</h2>
         <p className="text-[#3c5560] max-w-xl mb-6">
-          Whatever has gone wrong with your machine, we diagnose it at your doorstep, quote before we start, and finish most repairs the same day.
+          Honest diagnosis at your doorstep, price approved by you before work begins, and genuine spare parts on every refrigerator repair.
         </p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {services.map((s) => (
@@ -245,7 +245,7 @@ export default function WashingMachineRepairTheniPage() {
       {/* ============ BRANDS ============ */}
       <section className="max-w-5xl mx-auto px-5 pb-11">
         <h2 className="text-2xl md:text-[1.7rem] font-extrabold tracking-tight mb-2">All Brands, All Models</h2>
-        <p className="text-[#3c5560] mb-6">From old semi-automatics to the newest inverter front loads:</p>
+        <p className="text-[#3c5560] mb-6">Whichever refrigerator is in your kitchen, we've repaired that brand before:</p>
         <div className="flex flex-wrap gap-2.5">
           {brands.map((b) => (
             <span key={b} className="bg-white border border-[#cfe2e9] rounded-full px-5 py-2 text-sm font-semibold">{b}</span>
@@ -256,8 +256,8 @@ export default function WashingMachineRepairTheniPage() {
       {/* ============ AREAS ============ */}
       <section className="bg-[#e2eff4] border-y border-[#cfe2e9]">
         <div className="max-w-5xl mx-auto px-5 py-11">
-          <h2 className="text-2xl md:text-[1.7rem] font-extrabold tracking-tight mb-2">Areas We Cover in Theni District</h2>
-          <p className="text-[#3c5560] mb-6">Doorstep washing machine repair across Theni and nearby towns:</p>
+          <h2 className="text-2xl md:text-[1.7rem] font-extrabold tracking-tight mb-2">Areas We Cover in Madurai</h2>
+          <p className="text-[#3c5560] mb-6">Doorstep fridge repair across Madurai city and surrounding localities:</p>
           <div className="flex flex-wrap gap-2.5">
             {areas.map((a) => (
               <span key={a} className="bg-white border border-[#cfe2e9] rounded-lg px-3.5 py-1.5 text-sm font-medium">{a}</span>
@@ -302,7 +302,7 @@ export default function WashingMachineRepairTheniPage() {
       <div className="max-w-5xl mx-auto px-5 pb-11">
         <div className="bg-[#0a5a72] text-white text-center rounded-2xl px-6 py-9">
           <h2 className="text-2xl md:text-[1.7rem] font-extrabold tracking-tight">
-            Washing Machine Trouble in Theni? We&apos;re One Call Away.
+            Fridge Trouble in Madurai? We&apos;re One Call Away.
           </h2>
           <p className="opacity-85 mt-1.5 mb-5">Same-day doorstep service · All brands · Transparent pricing</p>
           <a
@@ -318,12 +318,12 @@ export default function WashingMachineRepairTheniPage() {
       <footer className="bg-[#0d2530] text-[#a9c6d1] text-sm">
         <div className="max-w-5xl mx-auto px-5 py-7 text-center">
           <p className="flex flex-wrap justify-center gap-x-4 gap-y-1.5">
-            <Link href="/washing-machine-repair-madurai" className="text-white hover:underline">Washing Machine Repair Madurai</Link>
-            <Link href="/washing-machine-repair-dindigul" className="text-white hover:underline">Washing Machine Repair Dindigul</Link>
-            <Link href="/ac-repair-theni" className="text-white hover:underline">AC Repair Theni</Link>
             <Link href="/fridge-repair-theni" className="text-white hover:underline">Fridge Repair Theni</Link>
+            <Link href="/fridge-repair-dindigul" className="text-white hover:underline">Fridge Repair Dindigul</Link>
+            <Link href="/ac-repair-madurai" className="text-white hover:underline">AC Repair Madurai</Link>
+            <Link href="/washing-machine-repair-madurai" className="text-white hover:underline">Washing Machine Repair Madurai</Link>
           </p>
-          <p className="mt-2.5">© 2026 A S SERVICE · Theni, Tamil Nadu</p>
+          <p className="mt-2.5">© 2026 A S SERVICE · Madurai, Tamil Nadu</p>
         </div>
       </footer>
 
@@ -333,7 +333,7 @@ export default function WashingMachineRepairTheniPage() {
           📞 Call Now
         </a>
         <a
-          href={`https://wa.me/${WHATSAPP}?text=Hi, I need washing machine repair in Theni`}
+          href={`https://wa.me/${WHATSAPP}?text=Hi, I need fridge repair in Madurai`}
           className="flex-1 bg-[#075e54] text-white text-center font-extrabold py-4"
         >
           💬 WhatsApp
