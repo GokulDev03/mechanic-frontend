@@ -1,329 +1,622 @@
+
+
 'use client';
-import { useEffect, useState, Suspense } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { CheckCircle, ChevronRight, ChevronLeft, Wind, Box, Waves, Tv } from 'lucide-react';
+import { useEffect, useMemo, useState, type CSSProperties } from 'react';
+import Link from 'next/link';
+import {
+  Wind, Box, Waves, Tv, User, Phone, MapPin, Home, Calendar, Clock,
+  ChevronRight, ChevronLeft, CheckCircle2, Wrench, PartyPopper, Shield, Zap, MessageCircle,
+} from 'lucide-react';
 import { useLanguage } from '@/lib/LanguageContext';
-import { getServices, createBooking } from '@/lib/api';
-import type { Service } from '@/types';
-import clsx from 'clsx';
+// import { createBooking } from '@/lib/api';  // ← ungaloda API function inga import pannunga
 
-const SERVICE_ICONS: Record<string, React.ElementType> = { wind: Wind, box: Box, waves: Waves, tv: Tv };
+/* ═══════════════ Data ═══════════════ */
 
-function BookingForm() {
-  const { t, lang } = useLanguage();
-  const router = useRouter();
-  const searchParams = useSearchParams();
+const services = [
+  { id: 'ac', Icon: Wind, en: 'AC Service & Repair', ta: 'ஏசி சர்வீஸ் & ரிப்பேர்', price: '₹500 – ₹3000', color: 'bg-sky-100 text-sky-600' },
+  { id: 'fridge', Icon: Box, en: 'Refrigerator Repair', ta: 'குளிர்சாதனப்பெட்டி ரிப்பேர்', price: '₹400 – ₹2500', color: 'bg-emerald-100 text-emerald-600' },
+  { id: 'washing', Icon: Waves, en: 'Washing Machine Service', ta: 'வாஷிங் மெஷின் சர்வீஸ்', price: '₹350 – ₹2000', color: 'bg-violet-100 text-violet-600' },
+  { id: 'tv', Icon: Tv, en: 'TV Repair', ta: 'டிவி ரிப்பேர்', price: '₹300 – ₹2500', color: 'bg-rose-100 text-rose-600' },
+];
+
+const districts = ['Theni', 'Madurai', 'Dindigul'];
+
+const timeSlots = [
+  { id: 'morning', label: '9 AM – 12 PM', ta: 'காலை' },
+  { id: 'afternoon', label: '12 PM – 3 PM', ta: 'மதியம்' },
+  { id: 'evening', label: '3 PM – 6 PM', ta: 'மாலை' },
+  { id: 'night', label: '6 PM – 8 PM', ta: 'இரவு' },
+];
+
+/* ═══════════════ Page ═══════════════ */
+
+export default function BookingPage() {
+  const { lang } = useLanguage();
   const [step, setStep] = useState(1);
-  const [services, setServices] = useState<Service[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [bookingNumber, setBookingNumber] = useState('');
+  const [direction, setDirection] = useState<'fwd' | 'back'>('fwd');
+  const [submitting, setSubmitting] = useState(false);
+  const [done, setDone] = useState(false);
+  const [error, setError] = useState('');
 
   const [form, setForm] = useState({
-    service_id: '',
-    customer_name: '',
-    customer_phone: '',
-    customer_address: '',
-    appliance_brand: '',
-    issue_description: '',
-    preferred_date: '',
-    preferred_time_slot: '',
+    service: '',
+    name: '',
+    phone: '',
+    district: '',
+    address: '',
+    problem: '',
+    date: '',
+    slot: '',
   });
-  const [errors, setErrors] = useState<Record<string, string>>({});
 
+  /* Dates: generate on client only (avoids hydration mismatch) */
+  const [dates, setDates] = useState<{ iso: string; day: string; num: string; month: string; today: boolean }[]>([]);
   useEffect(() => {
-    getServices().then((d: unknown) => {
-      const list = d as Service[];
-      setServices(list);
-      const preselect = searchParams.get('service');
-      if (preselect) setForm(f => ({ ...f, service_id: preselect }));
+    const list = Array.from({ length: 7 }, (_, i) => {
+      const d = new Date();
+      d.setDate(d.getDate() + i);
+      return {
+        iso: d.toISOString().split('T')[0],
+        day: d.toLocaleDateString('en-IN', { weekday: 'short' }),
+        num: String(d.getDate()),
+        month: d.toLocaleDateString('en-IN', { month: 'short' }),
+        today: i === 0,
+      };
     });
-  }, [searchParams]);
+    setDates(list);
+  }, []);
 
-  const tomorrow = () => {
-    const d = new Date();
-    d.setDate(d.getDate() + 1);
-    return d.toISOString().split('T')[0];
+  const set = (key: keyof typeof form, value: string) => {
+    setForm((f) => ({ ...f, [key]: value }));
+    setError('');
   };
 
-  const validate = () => {
-    const e: Record<string, string> = {};
-    if (step === 1 && !form.service_id) e.service_id = 'Please select a service';
+  const phoneValid = /^[6-9]\d{9}$/.test(form.phone.replace(/\s/g, ''));
+
+  const stepValid = useMemo(() => {
+    if (step === 1) return !!form.service;
+    if (step === 2) return form.name.trim().length >= 3 && phoneValid && !!form.district && form.address.trim().length >= 5;
+    if (step === 3) return !!form.date && !!form.slot;
+    return true;
+  }, [step, form, phoneValid]);
+
+  const stepError = () => {
+    if (step === 1) return lang === 'ta' ? 'ஒரு சேவையை தேர்ந்தெடுக்கவும்' : 'Please select a service';
     if (step === 2) {
-      if (!form.customer_name.trim()) e.customer_name = 'Name is required';
-      if (!form.customer_phone.trim() || !/^\d{10}$/.test(form.customer_phone)) e.customer_phone = 'Enter valid 10-digit number';
-      if (!form.customer_address.trim()) e.customer_address = 'Address is required';
+      if (form.name.trim().length < 3) return lang === 'ta' ? 'உங்கள் பெயரை உள்ளிடவும்' : 'Please enter your name';
+      if (!phoneValid) return lang === 'ta' ? 'சரியான 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்' : 'Enter a valid 10-digit mobile number';
+      if (!form.district) return lang === 'ta' ? 'மாவட்டத்தை தேர்ந்தெடுக்கவும்' : 'Please select your district';
+      return lang === 'ta' ? 'முகவரியை உள்ளிடவும்' : 'Please enter your address';
     }
-    if (step === 3) {
-      if (!form.preferred_date) e.preferred_date = 'Please select a date';
-      if (!form.preferred_time_slot) e.preferred_time_slot = 'Please select a time slot';
-    }
-    setErrors(e);
-    return Object.keys(e).length === 0;
+    if (step === 3) return lang === 'ta' ? 'தேதி மற்றும் நேரத்தை தேர்ந்தெடுக்கவும்' : 'Please pick a date and time slot';
+    return '';
   };
 
-  const next = () => { if (validate()) setStep(s => s + 1); };
-  const back = () => setStep(s => s - 1);
-  const set = (k: string, v: string) => { setForm(f => ({ ...f, [k]: v })); setErrors(e => ({ ...e, [k]: '' })); };
+  const next = () => {
+    if (!stepValid) { setError(stepError()); return; }
+    setDirection('fwd');
+    setStep((s) => Math.min(s + 1, 4));
+  };
+
+  const back = () => {
+    setDirection('back');
+    setError('');
+    setStep((s) => Math.max(s - 1, 1));
+  };
+
+  /* ══════ WhatsApp message builder ══════ */
+  const WHATSAPP_NUMBER = '918807086727'; // ← ungaloda business WhatsApp number (country code oda, + illama)
+
+  const buildWhatsAppMessage = () => {
+    const svc = lang === 'ta' ? selectedService?.ta : selectedService?.en;
+    const dateStr = selectedDate ? `${selectedDate.day}, ${selectedDate.num} ${selectedDate.month}` : form.date;
+    return [
+      '🔧 *New Service Booking — A S SERVICE*',
+      '',
+      `*Service:* ${svc}`,
+      `*Name:* ${form.name}`,
+      `*Phone:* +91 ${form.phone}`,
+      `*District:* ${form.district}`,
+      `*Address:* ${form.address}`,
+      form.problem ? `*Problem:* ${form.problem}` : '',
+      `*Date:* ${dateStr}`,
+      `*Time Slot:* ${selectedSlot?.label}`,
+      '',
+      'Please confirm my booking. Thank you!',
+    ].filter(Boolean).join('\n');
+  };
+
+  const openWhatsApp = () => {
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildWhatsAppMessage())}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
 
   const submit = async () => {
-    setLoading(true);
+    setSubmitting(true);
+    setError('');
+
+    /* WhatsApp-ah FIRST open pannanum (user click event kulla synchronous ah
+       irundha dhaan popup blocker block pannadhu) */
+    openWhatsApp();
+
     try {
-      const res = await createBooking({ ...form, service_id: parseInt(form.service_id) }) as { booking_number: string };
-      setBookingNumber(res.booking_number);
-      setStep(5);
-    } catch (err: unknown) {
-      alert(err instanceof Error ? err.message : 'Failed to create booking');
+      /* ══════ UNGALODA API CALL INGA ══════
+      await createBooking({
+        service: form.service,
+        customer_name: form.name,
+        phone: form.phone,
+        district: form.district,
+        address: form.address,
+        problem_description: form.problem,
+        preferred_date: form.date,
+        preferred_slot: form.slot,
+      });
+      ═══════════════════════════════════════ */
+      await new Promise((r) => setTimeout(r, 900)); // ← API connect pannina idha remove pannunga
+      setDone(true);
+    } catch {
+      setError(lang === 'ta' ? 'ஏதோ தவறு நடந்துவிட்டது. மீண்டும் முயற்சிக்கவும்.' : 'Something went wrong. Please try again or call us.');
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   };
 
-  const handleWhatsAppBooking = () => {
-  const phoneNumber = '9025649921'; 
-  const message =
-`Hi, I would like to book a service.
+  const selectedService = services.find((s) => s.id === form.service);
+  const selectedSlot = timeSlots.find((s) => s.id === form.slot);
+  const selectedDate = dates.find((d) => d.iso === form.date);
 
-Service: ${selectedService ? (lang === 'ta' ? selectedService.name_ta : selectedService.name_en) : ''}
-Name: ${form.customer_name}
-Phone: ${form.customer_phone}
-Address: ${form.customer_address}
-Brand: ${form.appliance_brand || '-'}
-Date: ${form.preferred_date}
-Time: ${form.preferred_time_slot}`;
+  const steps = [
+    { n: 1, label: lang === 'ta' ? 'சேவை' : 'Select Service' },
+    { n: 2, label: lang === 'ta' ? 'விவரங்கள்' : 'Your Details' },
+    { n: 3, label: lang === 'ta' ? 'நேரம்' : 'Schedule' },
+    { n: 4, label: lang === 'ta' ? 'உறுதி' : 'Confirm' },
+  ];
 
-  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-  window.open(url, '_blank');
-};
+  const slideStyle: CSSProperties = {
+    animation: `${direction === 'fwd' ? 'slideInRight' : 'slideInLeft'} 0.4s cubic-bezier(0.22,1,0.36,1) both`,
+  };
 
-  const selectedService = services.find(s => s.id === parseInt(form.service_id));
-  const steps = [t.booking.step1, t.booking.step2, t.booking.step3, t.booking.step4];
-
-  if (step === 5) {
+  /* ══════════ SUCCESS SCREEN ══════════ */
+  if (done) {
     return (
-      <div className="text-center py-12">
-        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-          <CheckCircle className="w-10 h-10 text-green-500" />
-        </div>
-        <p className="text-gray-600 mb-2">
-    Thank you for choosing our service.
-  </p>
+      <div className="min-h-[80vh] bg-gray-50 flex items-center justify-center px-4 py-16">
+        <style dangerouslySetInnerHTML={{ __html: bookingCss }} />
+        <div className="max-w-md w-full bg-white rounded-3xl border border-gray-100 shadow-xl p-8 text-center" style={{ animation: 'popIn 0.5s cubic-bezier(0.22,1,0.36,1) both' }}>
+          <div className="w-20 h-20 mx-auto rounded-full bg-green-100 flex items-center justify-center mb-6" style={{ animation: 'popIn 0.5s cubic-bezier(0.22,1,0.36,1) 0.15s both' }}>
+            <CheckCircle2 className="w-10 h-10 text-green-600" />
+          </div>
+          <h1 className="text-2xl font-extrabold text-gray-900 mb-2 flex items-center justify-center gap-2">
+            {lang === 'ta' ? 'பதிவு வெற்றி!' : 'Booking Confirmed!'}
+            <PartyPopper className="w-6 h-6 text-amber-500" />
+          </h1>
+          <p className="text-gray-500 mb-6">
+            {lang === 'ta'
+              ? 'எங்கள் டெக்னீஷியன் விரைவில் உங்களை தொடர்பு கொள்வார்'
+              : 'Our technician will call you shortly to confirm your appointment'}
+          </p>
 
-  <p className="text-gray-700">
-    Please call us at{" "}
-    <a
-      href="tel:+918807086727"
-      className="font-semibold text-blue-600 hover:underline"
-    >
-      +91 88070 86727
-    </a>{" "}
-    to confirm your booking and schedule your service.
-  </p>
+          <div className="bg-gray-50 rounded-2xl p-5 text-left space-y-3 mb-6 border border-gray-100">
+            <div className="flex items-center gap-3 text-sm">
+              <Wrench className="w-4 h-4 text-amber-600 flex-shrink-0" />
+              <span className="font-semibold text-gray-900">{lang === 'ta' ? selectedService?.ta : selectedService?.en}</span>
+            </div>
+            <div className="flex items-center gap-3 text-sm">
+              <Calendar className="w-4 h-4 text-amber-600 flex-shrink-0" />
+              <span className="text-gray-700">{selectedDate ? `${selectedDate.day}, ${selectedDate.num} ${selectedDate.month}` : form.date} · {selectedSlot?.label}</span>
+            </div>
+            <div className="flex items-center gap-3 text-sm">
+              <MapPin className="w-4 h-4 text-amber-600 flex-shrink-0" />
+              <span className="text-gray-700">{form.district}</span>
+            </div>
+          </div>
 
-  <p className="mt-4 text-sm italic text-gray-500">
-    "Quality service isn't just our job — it's our commitment."
-  </p>
-          <button
-            onClick={() => { setStep(1); setForm({ service_id: '', customer_name: '', customer_phone: '', customer_address: '', appliance_brand: '', issue_description: '', preferred_date: '', preferred_time_slot: '' }); }}
-            className="btn-outline mt-4"
-          >
-            {t.booking.bookAnother}
-          </button>
+          <div className="flex flex-col gap-3">
+            <button
+              onClick={openWhatsApp}
+              className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3.5 rounded-xl transition-colors inline-flex items-center justify-center gap-2"
+            >
+              <MessageCircle className="w-4 h-4" />
+              {lang === 'ta' ? 'WhatsApp-ல் விவரம் அனுப்பு' : 'Send Details on WhatsApp'}
+            </button>
+            <a href="tel:+918807086727" className="w-full bg-amber-500 hover:bg-amber-600 text-white font-semibold px-6 py-3.5 rounded-xl transition-colors inline-flex items-center justify-center gap-2">
+              <Phone className="w-4 h-4" />
+              {lang === 'ta' ? 'உடனடி உதவிக்கு அழைக்கவும்' : 'Call for Urgent Service'}
+            </a>
+            <Link href="/" className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-6 py-3.5 rounded-xl transition-colors inline-flex items-center justify-center gap-2">
+              <Home className="w-4 h-4" />
+              {lang === 'ta' ? 'முகப்பு பக்கம்' : 'Back to Home'}
+            </Link>
+          </div>
+
+          <p className="text-xs text-gray-400 mt-4">
+            {lang === 'ta'
+              ? 'WhatsApp திறக்கவில்லையா? மேலே உள்ள பச்சை பட்டனை அழுத்தவும்'
+              : "WhatsApp didn't open? Tap the green button above"}
+          </p>
         </div>
-      
+      </div>
     );
   }
 
+  /* ══════════ WIZARD ══════════ */
   return (
-    <div>
-      {/* Step indicator */}
-      <div className="flex items-center justify-between mb-8">
-        {steps.map((label, i) => (
-          <div key={i} className="flex items-center flex-1">
-            <div className="flex flex-col items-center">
-              <div className={clsx(
-                'w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-colors',
-                step > i + 1 ? 'bg-green-500 text-white' : step === i + 1 ? 'bg-primary-800 text-white' : 'bg-gray-200 text-gray-500'
-              )}>
-                {step > i + 1 ? <CheckCircle className="w-5 h-5" /> : i + 1}
-              </div>
-              <span className={clsx('text-xs mt-1 hidden sm:block', step === i + 1 ? 'text-primary-800 font-semibold' : 'text-gray-400')}>
-                {label}
-              </span>
+    <div className="min-h-screen bg-gray-50 py-12 px-4">
+      <style dangerouslySetInnerHTML={{ __html: bookingCss }} />
+
+      {/* Header */}
+      <div className="text-center mb-10" style={{ animation: 'fadeUp 0.6s ease both' }}>
+        <span className="inline-block bg-amber-50 text-amber-700 border border-amber-200 rounded-full px-4 py-1.5 text-sm font-medium mb-4">
+          <Zap className="w-3.5 h-3.5 inline -mt-0.5 mr-1" />
+          {lang === 'ta' ? 'அதே நாள் சேவை' : 'Same-Day Service Available'}
+        </span>
+        <h1 className="text-3xl lg:text-4xl font-extrabold text-gray-900 mb-2">
+          {lang === 'ta' ? 'சேவை பதிவு' : 'Book a Service'}
+        </h1>
+        <p className="text-gray-500">
+          {lang === 'ta' ? '2 நிமிடத்தில் பதிவு செய்யுங்கள்' : 'Takes less than 2 minutes'}
+        </p>
+      </div>
+
+      <div className="max-w-2xl mx-auto">
+        <div className="bg-white rounded-3xl border border-gray-100 shadow-lg overflow-hidden" style={{ animation: 'fadeUp 0.6s ease 0.1s both' }}>
+
+          {/* ── Progress bar ── */}
+          <div className="px-6 sm:px-10 pt-8 pb-6 border-b border-gray-100">
+            <div className="relative flex justify-between">
+              {/* Track */}
+              <div className="absolute top-5 left-5 right-5 h-1 bg-gray-100 rounded-full" />
+              {/* Fill */}
+              <div
+                className="absolute top-5 left-5 h-1 bg-amber-500 rounded-full transition-all duration-500 ease-out"
+                style={{ width: `calc(${((step - 1) / 3) * 100}% - ${((step - 1) / 3) * 40}px)` }}
+              />
+              {steps.map((s) => {
+                const active = step === s.n;
+                const completed = step > s.n;
+                return (
+                  <div key={s.n} className="relative z-10 flex flex-col items-center gap-2">
+                    <div
+                      className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300
+                        ${completed ? 'bg-amber-500 text-white' : active ? 'bg-amber-500 text-white ring-4 ring-amber-100 scale-110' : 'bg-gray-100 text-gray-400'}`}
+                    >
+                      {completed ? <CheckCircle2 className="w-5 h-5" /> : s.n}
+                    </div>
+                    <span className={`text-[11px] sm:text-xs font-medium transition-colors ${active || completed ? 'text-amber-600' : 'text-gray-400'}`}>
+                      {s.label}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
-            {i < steps.length - 1 && (
-              <div className={clsx('flex-1 h-0.5 mx-2', step > i + 1 ? 'bg-green-400' : 'bg-gray-200')} />
+          </div>
+
+          {/* ── Step content ── */}
+          <div className="px-6 sm:px-10 py-8 min-h-[380px]">
+
+            {/* STEP 1 — Select Service */}
+            {step === 1 && (
+              <div key="s1" style={slideStyle}>
+                <h2 className="text-xl font-bold text-gray-900 mb-1">
+                  {lang === 'ta' ? 'சேவையை தேர்ந்தெடுக்கவும்' : 'Choose a Service'}
+                </h2>
+                <p className="text-sm text-gray-500 mb-6">
+                  {lang === 'ta' ? 'எந்த சாதனத்தை சரி செய்ய வேண்டும்?' : 'Which appliance needs fixing?'}
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {services.map((s) => {
+                    const selected = form.service === s.id;
+                    return (
+                      <button
+                        key={s.id}
+                        onClick={() => set('service', s.id)}
+                        className={`group relative text-left rounded-2xl border-2 p-5 transition-all duration-200
+                          ${selected
+                            ? 'border-amber-500 bg-amber-50 shadow-md shadow-amber-100'
+                            : 'border-gray-200 bg-white hover:border-amber-300 hover:shadow-md hover:-translate-y-0.5'}`}
+                      >
+                        {selected && (
+                          <span className="absolute top-3 right-3" style={{ animation: 'popIn 0.3s ease both' }}>
+                            <CheckCircle2 className="w-5 h-5 text-amber-500" />
+                          </span>
+                        )}
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3 transition-transform duration-200 group-hover:scale-110 ${s.color}`}>
+                          <s.Icon className="w-6 h-6" />
+                        </div>
+                        <div className="font-bold text-gray-900">{lang === 'ta' ? s.ta : s.en}</div>
+                        <div className="text-xs text-gray-500 mt-1">{lang === 'ta' ? 'விலை' : 'Starts from'} {s.price.split(' – ')[0]}</div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* STEP 2 — Your Details */}
+            {step === 2 && (
+              <div key="s2" style={slideStyle}>
+                <h2 className="text-xl font-bold text-gray-900 mb-1">
+                  {lang === 'ta' ? 'உங்கள் விவரங்கள்' : 'Your Details'}
+                </h2>
+                <p className="text-sm text-gray-500 mb-6">
+                  {lang === 'ta' ? 'உங்களை தொடர்பு கொள்ள இந்த தகவல்கள் தேவை' : 'We need these to reach you'}
+                </p>
+
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-sm font-semibold text-gray-700 mb-1.5 block">
+                      {lang === 'ta' ? 'பெயர்' : 'Full Name'} *
+                    </label>
+                    <div className="relative">
+                      <User className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+                      <input
+                        type="text"
+                        value={form.name}
+                        onChange={(e) => set('name', e.target.value)}
+                        placeholder={lang === 'ta' ? 'உங்கள் பெயர்' : 'e.g. Rajesh Kumar'}
+                        className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:border-amber-400 focus:ring-4 focus:ring-amber-50 outline-none transition-all text-gray-900"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-semibold text-gray-700 mb-1.5 block">
+                      {lang === 'ta' ? 'மொபைல் எண்' : 'Mobile Number'} *
+                    </label>
+                    <div className="relative">
+                      <Phone className="w-4 h-4 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
+                      <input
+                        type="tel"
+                        inputMode="numeric"
+                        maxLength={10}
+                        value={form.phone}
+                        onChange={(e) => set('phone', e.target.value.replace(/\D/g, ''))}
+                        placeholder="98765 43210"
+                        className={`w-full pl-11 pr-4 py-3 rounded-xl border outline-none transition-all text-gray-900
+                          ${form.phone && !phoneValid ? 'border-red-300 focus:ring-4 focus:ring-red-50' : 'border-gray-200 focus:border-amber-400 focus:ring-4 focus:ring-amber-50'}`}
+                      />
+                      {form.phone && phoneValid && (
+                        <CheckCircle2 className="w-4 h-4 text-green-500 absolute right-4 top-1/2 -translate-y-1/2" style={{ animation: 'popIn 0.3s ease both' }} />
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-semibold text-gray-700 mb-1.5 block">
+                      {lang === 'ta' ? 'மாவட்டம்' : 'District'} *
+                    </label>
+                    <div className="grid grid-cols-3 gap-3">
+                      {districts.map((d) => (
+                        <button
+                          key={d}
+                          onClick={() => set('district', d)}
+                          className={`py-3 rounded-xl border-2 text-sm font-semibold transition-all duration-200
+                            ${form.district === d
+                              ? 'border-amber-500 bg-amber-50 text-amber-700'
+                              : 'border-gray-200 text-gray-600 hover:border-amber-300'}`}
+                        >
+                          {d}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-semibold text-gray-700 mb-1.5 block">
+                      {lang === 'ta' ? 'முகவரி' : 'Address'} *
+                    </label>
+                    <div className="relative">
+                      <MapPin className="w-4 h-4 text-gray-400 absolute left-4 top-3.5" />
+                      <textarea
+                        value={form.address}
+                        onChange={(e) => set('address', e.target.value)}
+                        rows={2}
+                        placeholder={lang === 'ta' ? 'வீட்டு எண், தெரு, பகுதி' : 'House no, street, area'}
+                        className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:border-amber-400 focus:ring-4 focus:ring-amber-50 outline-none transition-all resize-none text-gray-900"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-semibold text-gray-700 mb-1.5 block">
+                      {lang === 'ta' ? 'பிரச்சனை (விருப்பம்)' : 'Describe the Problem'} <span className="text-gray-400 font-normal">({lang === 'ta' ? 'விருப்பம்' : 'optional'})</span>
+                    </label>
+                    <textarea
+                      value={form.problem}
+                      onChange={(e) => set('problem', e.target.value)}
+                      rows={2}
+                      placeholder={lang === 'ta' ? 'எ.கா: ஏசி குளிர்ச்சி இல்லை' : 'e.g. AC not cooling, water leaking'}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-amber-400 focus:ring-4 focus:ring-amber-50 outline-none transition-all resize-none text-gray-900"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* STEP 3 — Schedule */}
+            {step === 3 && (
+              <div key="s3" style={slideStyle}>
+                <h2 className="text-xl font-bold text-gray-900 mb-1">
+                  {lang === 'ta' ? 'தேதி & நேரம்' : 'Pick Date & Time'}
+                </h2>
+                <p className="text-sm text-gray-500 mb-6">
+                  {lang === 'ta' ? 'உங்களுக்கு வசதியான நேரத்தை தேர்ந்தெடுக்கவும்' : 'Choose a convenient slot for the technician visit'}
+                </p>
+
+                <label className="text-sm font-semibold text-gray-700 mb-2 block flex items-center gap-1.5">
+                  <Calendar className="w-4 h-4 text-amber-600" />
+                  {lang === 'ta' ? 'தேதி' : 'Select Date'}
+                </label>
+                <div className="flex gap-2.5 overflow-x-auto pb-2 mb-6 -mx-1 px-1">
+                  {dates.map((d) => {
+                    const selected = form.date === d.iso;
+                    return (
+                      <button
+                        key={d.iso}
+                        onClick={() => set('date', d.iso)}
+                        className={`flex-shrink-0 w-16 py-3 rounded-2xl border-2 text-center transition-all duration-200
+                          ${selected
+                            ? 'border-amber-500 bg-amber-500 text-white shadow-md shadow-amber-200 scale-105'
+                            : 'border-gray-200 bg-white text-gray-700 hover:border-amber-300'}`}
+                      >
+                        <div className={`text-[10px] font-semibold uppercase ${selected ? 'text-amber-100' : 'text-gray-400'}`}>
+                          {d.today ? (lang === 'ta' ? 'இன்று' : 'Today') : d.day}
+                        </div>
+                        <div className="text-lg font-extrabold leading-tight">{d.num}</div>
+                        <div className={`text-[10px] ${selected ? 'text-amber-100' : 'text-gray-400'}`}>{d.month}</div>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <label className="text-sm font-semibold text-gray-700 mb-2 block flex items-center gap-1.5">
+                  <Clock className="w-4 h-4 text-amber-600" />
+                  {lang === 'ta' ? 'நேரம்' : 'Select Time Slot'}
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  {timeSlots.map((slot) => {
+                    const selected = form.slot === slot.id;
+                    return (
+                      <button
+                        key={slot.id}
+                        onClick={() => set('slot', slot.id)}
+                        className={`py-3.5 px-4 rounded-xl border-2 text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-2
+                          ${selected
+                            ? 'border-amber-500 bg-amber-50 text-amber-700'
+                            : 'border-gray-200 text-gray-600 hover:border-amber-300'}`}
+                      >
+                        {selected && <CheckCircle2 className="w-4 h-4" style={{ animation: 'popIn 0.3s ease both' }} />}
+                        {slot.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* STEP 4 — Confirm */}
+            {step === 4 && (
+              <div key="s4" style={slideStyle}>
+                <h2 className="text-xl font-bold text-gray-900 mb-1">
+                  {lang === 'ta' ? 'விவரங்களை சரிபார்க்கவும்' : 'Confirm Your Booking'}
+                </h2>
+                <p className="text-sm text-gray-500 mb-6">
+                  {lang === 'ta' ? 'எல்லாம் சரியா என்று பாருங்கள்' : 'Review everything before submitting'}
+                </p>
+
+                <div className="bg-gray-50 rounded-2xl border border-gray-100 divide-y divide-gray-100 mb-5">
+                  {[
+                    { icon: Wrench, label: lang === 'ta' ? 'சேவை' : 'Service', value: lang === 'ta' ? selectedService?.ta : selectedService?.en, edit: 1 },
+                    { icon: User, label: lang === 'ta' ? 'பெயர்' : 'Name', value: form.name, edit: 2 },
+                    { icon: Phone, label: lang === 'ta' ? 'மொபைல்' : 'Phone', value: `+91 ${form.phone}`, edit: 2 },
+                    { icon: MapPin, label: lang === 'ta' ? 'முகவரி' : 'Address', value: `${form.address}, ${form.district}`, edit: 2 },
+                    { icon: Calendar, label: lang === 'ta' ? 'நேரம்' : 'Schedule', value: selectedDate ? `${selectedDate.day}, ${selectedDate.num} ${selectedDate.month} · ${selectedSlot?.label}` : '', edit: 3 },
+                  ].map((row) => (
+                    <div key={row.label} className="flex items-center gap-3 px-5 py-3.5">
+                      <row.icon className="w-4 h-4 text-amber-600 flex-shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <div className="text-[11px] text-gray-400 uppercase tracking-wide font-semibold">{row.label}</div>
+                        <div className="text-sm font-medium text-gray-900 truncate">{row.value}</div>
+                      </div>
+                      <button
+                        onClick={() => { setDirection('back'); setStep(row.edit); }}
+                        className="text-xs text-amber-600 font-semibold hover:underline flex-shrink-0"
+                      >
+                        {lang === 'ta' ? 'மாற்று' : 'Edit'}
+                      </button>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex items-start gap-2.5 bg-green-50 border border-green-100 rounded-xl px-4 py-3 text-sm text-green-800">
+                  <Shield className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span>
+                    {lang === 'ta'
+                      ? 'இப்போது பணம் செலுத்த தேவையில்லை. சேவைக்கு பிறகு மட்டுமே கட்டணம்.'
+                      : 'No advance payment needed. Pay only after the service is done.'}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* Error */}
+            {error && (
+              <div className="mt-5 bg-red-50 border border-red-100 text-red-700 text-sm rounded-xl px-4 py-3" style={{ animation: 'shake 0.4s ease both' }}>
+                {error}
+              </div>
             )}
           </div>
-        ))}
-      </div>
 
-      {/* Step 1 - Service */}
-      {step === 1 && (
-        <div>
-          <h2 className="text-xl font-bold text-gray-800 mb-6">{t.booking.selectService}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {services.map(s => {
-              const Icon = SERVICE_ICONS[s.icon] || Wind;
-              const selected = form.service_id === String(s.id);
-              return (
-                <button
-                  key={s.id}
-                  onClick={() => set('service_id', String(s.id))}
-                  className={clsx(
-                    'flex items-center gap-4 p-5 rounded-xl border-2 text-left transition-all',
-                    selected ? 'border-primary-600 bg-primary-50' : 'border-gray-200 hover:border-primary-300 bg-white'
-                  )}
-                >
-                  <div className={clsx('w-12 h-12 rounded-xl flex items-center justify-center shrink-0', selected ? 'bg-primary-600 text-white' : 'bg-gray-100 text-gray-600')}>
-                    <Icon className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-800">{lang === 'ta' ? s.name_ta : s.name_en}</p>
-              
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-          {errors.service_id && <p className="text-red-500 text-sm mt-2">{errors.service_id}</p>}
-        </div>
-      )}
+          {/* ── Footer buttons ── */}
+          <div className="px-6 sm:px-10 py-6 border-t border-gray-100 bg-gray-50/50 flex items-center justify-between gap-4">
+            {step > 1 ? (
+              <button
+                onClick={back}
+                className="inline-flex items-center gap-1.5 text-gray-600 font-semibold px-5 py-3 rounded-xl hover:bg-gray-100 transition-colors"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                {lang === 'ta' ? 'பின்' : 'Back'}
+              </button>
+            ) : <span />}
 
-      {/* Step 2 - Customer Details */}
-      {step === 2 && (
-        <div className="space-y-4">
-          <h2 className="text-xl font-bold text-gray-800 mb-6">{t.booking.step2}</h2>
-          {[
-            { key: 'customer_name', label: t.booking.customerName, type: 'text', required: true },
-            { key: 'customer_phone', label: t.booking.customerPhone, type: 'tel', required: true },
-          ].map(({ key, label, type }) => (
-            <div key={key}>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{label} *</label>
-              <input type={type} value={(form as Record<string, string>)[key]} onChange={e => set(key, e.target.value)} className="input-field" />
-              {errors[key] && <p className="text-red-500 text-xs mt-1">{errors[key]}</p>}
-            </div>
-          ))}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.booking.customerAddress} *</label>
-            <textarea rows={3} value={form.customer_address} onChange={e => set('customer_address', e.target.value)} className="input-field resize-none" />
-            {errors.customer_address && <p className="text-red-500 text-xs mt-1">{errors.customer_address}</p>}
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.booking.applianceBrand}</label>
-            <input type="text" value={form.appliance_brand} onChange={e => set('appliance_brand', e.target.value)} className="input-field" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.booking.issueDescription}</label>
-            <textarea rows={3} value={form.issue_description} onChange={e => set('issue_description', e.target.value)} className="input-field resize-none" />
+            {step < 4 ? (
+              <button
+                onClick={next}
+                className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold px-8 py-3.5 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-amber-200 active:scale-95"
+              >
+                {lang === 'ta' ? 'தொடரவும்' : 'Continue'}
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            ) : (
+              <button
+                onClick={submit}
+                disabled={submitting}
+                className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 disabled:opacity-60 text-white font-semibold px-8 py-3.5 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-green-200 active:scale-95"
+              >
+                {submitting ? (
+                  <>
+                    <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full" style={{ animation: 'spin 0.7s linear infinite' }} />
+                    {lang === 'ta' ? 'பதிவு செய்கிறது...' : 'Booking...'}
+                  </>
+                ) : (
+                  <>
+                    <MessageCircle className="w-4 h-4" />
+                    {lang === 'ta' ? 'WhatsApp-ல் பதிவு செய்' : 'Confirm on WhatsApp'}
+                  </>
+                )}
+              </button>
+            )}
           </div>
         </div>
-      )}
 
-      {/* Step 3 - Schedule */}
-      {step === 3 && (
-        <div className="space-y-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-6">{t.booking.step3}</h2>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">{t.booking.preferredDate} *</label>
-            <input type="date" min={tomorrow()} value={form.preferred_date} onChange={e => set('preferred_date', e.target.value)} className="input-field" />
-            {errors.preferred_date && <p className="text-red-500 text-xs mt-1">{errors.preferred_date}</p>}
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">{t.booking.preferredTime} *</label>
-            <div className="grid grid-cols-2 gap-3">
-              {t.booking.timeSlots.map(slot => (
-                <button
-                  key={slot}
-                  onClick={() => set('preferred_time_slot', slot)}
-                  className={clsx(
-                    'py-3 px-4 rounded-xl border-2 text-sm font-medium transition-all',
-                    form.preferred_time_slot === slot ? 'border-primary-600 bg-primary-600 text-white' : 'border-gray-200 hover:border-primary-300 text-gray-700'
-                  )}
-                >
-                  {slot}
-                </button>
-              ))}
-            </div>
-            {errors.preferred_time_slot && <p className="text-red-500 text-xs mt-1">{errors.preferred_time_slot}</p>}
-          </div>
+        {/* Trust strip below card */}
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-6 text-xs text-gray-500" style={{ animation: 'fadeUp 0.6s ease 0.25s both' }}>
+          <span className="flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5 text-green-500" /> {lang === 'ta' ? 'சான்றளிக்கப்பட்ட டெக்னீஷியன்கள்' : 'Certified technicians'}</span>
+          <span className="flex items-center gap-1.5"><Shield className="w-3.5 h-3.5 text-green-500" /> {lang === 'ta' ? 'சேவை உத்தரவாதம்' : 'Service warranty'}</span>
+          <span className="flex items-center gap-1.5"><Zap className="w-3.5 h-3.5 text-green-500" /> {lang === 'ta' ? 'அதே நாள் சேவை' : 'Same-day service'}</span>
         </div>
-      )}
 
-      {/* Step 4 - Confirm */}
-      {step === 4 && (
-        <div>
-          <h2 className="text-xl font-bold text-gray-800 mb-6">{t.booking.review}</h2>
-          <div className="bg-gray-50 rounded-xl p-6 space-y-3 text-sm">
-            {[
-              { label: lang === 'ta' ? 'சேவை' : 'Service', value: selectedService ? (lang === 'ta' ? selectedService.name_ta : selectedService.name_en) : '' },
-              { label: lang === 'ta' ? 'பெயர்' : 'Name', value: form.customer_name },
-              { label: lang === 'ta' ? 'தொலைபேசி' : 'Phone', value: form.customer_phone },
-              { label: lang === 'ta' ? 'முகவரி' : 'Address', value: form.customer_address },
-              { label: lang === 'ta' ? 'பிராண்ட்' : 'Brand', value: form.appliance_brand || '—' },
-              { label: lang === 'ta' ? 'தேதி' : 'Date', value: form.preferred_date },
-              { label: lang === 'ta' ? 'நேரம்' : 'Time', value: form.preferred_time_slot },
-            ].map(({ label, value }) => (
-              <div key={label} className="flex justify-between py-2 border-b border-gray-200 last:border-0">
-                <span className="font-medium text-gray-500">{label}</span>
-                <span className="text-gray-800 text-right max-w-[60%]">{value}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Navigation */}
-<div className="flex flex-col-reverse sm:flex-row justify-between items-stretch sm:items-center gap-4 mt-8 pt-6 border-t border-gray-100">
-        {step > 1 ? (
-          <button onClick={back} className="flex items-center gap-2 text-gray-600 hover:text-gray-800 font-medium">
-            <ChevronLeft className="w-5 h-5" />
-            {t.booking.back}
-          </button>
-        ) : <div />}
-        {step < 4 ? (
-          <button onClick={next} className="btn-primary w-full sm:w-auto">
-            {t.booking.next}
-            <ChevronRight className="w-5 h-5" />
-          </button>
-        ) : (
-          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-            <button
-              onClick={handleWhatsAppBooking}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-xl font-medium transition-colors"
-            >
-              {/* WhatsApp icon */}
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2.05 22l5.25-1.38a9.85 9.85 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.2 0 4.27.86 5.82 2.42a8.2 8.2 0 0 1 2.42 5.82c0 4.54-3.7 8.23-8.24 8.23a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.25-4.37c0-4.54 3.7-8.24 8.23-8.24m-4.52 4.7c-.16 0-.42.06-.64.31-.22.25-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.67 2.55 4.04 3.58 2.38 1.03 2.38.69 2.81.65.43-.04 1.39-.57 1.59-1.12.2-.55.2-1.02.14-1.12-.06-.1-.22-.16-.46-.28-.24-.12-1.39-.69-1.61-.77-.22-.08-.37-.12-.53.12-.16.24-.61.77-.74.93-.14.16-.27.18-.51.06-.24-.12-1.01-.37-1.93-1.19a7.27 7.27 0 0 1-1.34-1.67c-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.43.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.43-.06-.12-.53-1.29-.74-1.76-.19-.46-.39-.4-.53-.41z" />
-              </svg>
-              Book via WhatsApp
-            </button>
-
-            <button onClick={submit} disabled={loading} className="btn-primary">
-              {loading ? t.common.loading : t.booking.confirm}
-              {!loading && <CheckCircle className="w-5 h-5" />}
-            </button>
-          </div>
-        )}
+        {/* Call fallback */}
+        <p className="text-center text-sm text-gray-500 mt-4">
+          {lang === 'ta' ? 'ஆன்லைனில் சிக்கலா?' : 'Prefer to book by phone?'}{' '}
+          <a href="tel:+918807086727" className="text-amber-600 font-semibold hover:underline">
+            +91 88070 86727
+          </a>
+        </p>
       </div>
     </div>
   );
 }
 
-export default function BookingPage() {
-  const { t } = useLanguage();
-  return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-2xl mx-auto px-4">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-extrabold text-primary-800">{t.booking.title}</h1>
-          <p className="text-gray-500 mt-2">{t.booking.subtitle}</p>
-        </div>
-        <div className="card p-8">
-          <Suspense fallback={<div className="text-center py-8">{t.common.loading}</div>}>
-            <BookingForm />
-          </Suspense>
-        </div>
-      </div>
-    </div>
-  );
+/* ═══════════════ CSS (hydration-safe via dangerouslySetInnerHTML) ═══════════════ */
+
+const bookingCss = `
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideInRight { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slideInLeft { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes popIn { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
+@keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }
+`;
