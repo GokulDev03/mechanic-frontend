@@ -75,12 +75,17 @@ const breadcrumbJsonLd = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "Washing Machine Repair Madurai",
-      item: "https://mechanic-frontend-smoky.vercel.app/washing-machine-repair-madurai",
+      name: "Washing Machine Repair",
+      item: "https://mechanic-frontend-smoky.vercel.app/washing-mechine-repair-madurai",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "madurai",
+      item: "https://mechanic-frontend-smoky.vercel.app/washing-mechine-repair-madurai",
     },
   ],
 };
-
 const serviceJsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",

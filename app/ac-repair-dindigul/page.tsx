@@ -94,7 +94,13 @@ const breadcrumbJsonLd = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "AC Repair Dindigul",
+      name: "AC Service",
+      item: "https://mechanic-frontend-smoky.vercel.app/ac-repair-dindigul",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "dindigul",
       item: "https://mechanic-frontend-smoky.vercel.app/ac-repair-dindigul",
     },
   ],

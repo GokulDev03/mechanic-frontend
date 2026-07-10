@@ -76,7 +76,13 @@ const breadcrumbJsonLd = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "Fridge Repair Madurai",
+      name: "Fridge Repair",
+      item: "https://mechanic-frontend-smoky.vercel.app/fridge-repair-madurai",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "Madurai",
       item: "https://mechanic-frontend-smoky.vercel.app/fridge-repair-madurai",
     },
   ],

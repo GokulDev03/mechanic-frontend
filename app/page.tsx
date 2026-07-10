@@ -98,37 +98,37 @@ const faqJsonLd = {
   ]
 };
 
-const localBusinessJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://mechanic-frontend-smoky.vercel.app/#business",
-  "name": "A S SERVICE",
-  "image": "https://mechanic-frontend-smoky.vercel.app/public/logo3.png",
-  "url": "https://mechanic-frontend-smoky.vercel.app",
-  "telephone": "+91-9025649921",
-  "priceRange": "₹₹",
-  "address": { "@type": "PostalAddress", "addressLocality": "Theni", "addressRegion": "Tamil Nadu", "addressCountry": "IN" },
-  "areaServed": [
-    { "@type": "City", "name": "Theni" },
-    { "@type": "City", "name": "Madurai" },
-    { "@type": "City", "name": "Dindigul" }
-  ],
-  "openingHours": "Mo-Su 08:00-20:00",
-  "serviceArea": [
-    { "@type": "City", "name": "Theni" },
-    { "@type": "City", "name": "Madurai" },
-    { "@type": "City", "name": "Dindigul" }
-  ]
-};
+// const localBusinessJsonLd = {
+//   "@context": "https://schema.org",
+//   "@type": "LocalBusiness",
+//   "@id": "https://mechanic-frontend-smoky.vercel.app/#business",
+//   "name": "A S SERVICE",
+//   "image": "https://mechanic-frontend-smoky.vercel.app/public/logo3.png",
+//   "url": "https://mechanic-frontend-smoky.vercel.app",
+//   "telephone": "+91-9025649921",
+//   "priceRange": "₹₹",
+//   "address": { "@type": "PostalAddress", "addressLocality": "Theni", "addressRegion": "Tamil Nadu", "addressCountry": "IN" },
+//   "areaServed": [
+//     { "@type": "City", "name": "Theni" },
+//     { "@type": "City", "name": "Madurai" },
+//     { "@type": "City", "name": "Dindigul" }
+//   ],
+//   "openingHours": "Mo-Su 08:00-20:00",
+//   "serviceArea": [
+//     { "@type": "City", "name": "Theni" },
+//     { "@type": "City", "name": "Madurai" },
+//     { "@type": "City", "name": "Dindigul" }
+//   ]
+// };
 
-const organizationJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "A S SERVICE",
-  "url": "https://mechanic-frontend-smoky.vercel.app",
-  "image": "https://mechanic-frontend-smoky.vercel.app/public/logo3.png",
-  "telephone": "+91 88070 86727"
-};
+// const organizationJsonLd = {
+//   "@context": "https://schema.org",
+//   "@type": "Organization",
+//   "name": "A S SERVICE",
+//   "url": "https://mechanic-frontend-smoky.vercel.app",
+//   "image": "https://mechanic-frontend-smoky.vercel.app/public/logo3.png",
+//   "telephone": "+91 88070 86727"
+// };
 
 /* ═══════════════ Data ═══════════════ */
 
@@ -249,8 +249,8 @@ export default function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
+      {/* <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }} /> */}
+      {/* <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} /> */}
 
       {/* ── Keyframes for this page ── */}
       <style dangerouslySetInnerHTML={{ __html: `

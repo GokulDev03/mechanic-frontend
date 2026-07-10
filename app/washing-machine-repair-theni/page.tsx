@@ -76,8 +76,14 @@ const breadcrumbJsonLd = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "Washing Machine Repair Theni",
-      item: "https://mechanic-frontend-smoky.vercel.app/washing-machine-repair-theni",
+      name: "Washing Machine Repair",
+      item: "https://mechanic-frontend-smoky.vercel.app/washing-mechine-repair-theni",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "theni",
+      item: "https://mechanic-frontend-smoky.vercel.app/washing-mechine-repair-theni",
     },
   ],
 };

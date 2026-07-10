@@ -75,8 +75,14 @@ const breadcrumbJsonLd = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "Washing Machine Repair Dindigul",
-      item: "https://mechanic-frontend-smoky.vercel.app/washing-machine-repair-dindigul",
+      name: "Washing Machine Repair",
+      item: "https://mechanic-frontend-smoky.vercel.app/washing-mechine-repair-dindigul",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: "dindigul",
+      item: "https://mechanic-frontend-smoky.vercel.app/washing-mechine-repair-dindigul",
     },
   ],
 };
