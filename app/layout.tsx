@@ -61,7 +61,7 @@ const jsonLd = {
 
   url: "https://mechanic-frontend-smoky.vercel.app",
 
-  image: "https://mechanic-frontend-smoky.vercel.app/og-image.jpg",
+  image: "https://mechanic-frontend-smoky.vercel.app/logo.png",
 
   logo: "https://mechanic-frontend-smoky.vercel.app/logo3.png",
 
@@ -71,14 +71,22 @@ const jsonLd = {
   
 
   address: {
-    "@type": "PostalAddress",
-    addressLocality: "Theni",
-    addressRegion: "Tamil Nadu",
-    postalCode: "625531",
-    addressCountry: "IN",
-  },
+  "@type": "PostalAddress",
+  streetAddress: "2982+JVX, Fire Engine Office Rd, Ammankulam",
+  addressLocality: "Bodinayakanur",
+  addressRegion: "Tamil Nadu",
+  postalCode: "625513",
+  addressCountry: "IN",
+},
+geo: {
+  "@type": "GeoCoordinates",
+  latitude: "10.0115",
+  longitude: "77.3498",
+},
 
-  sameAs: [],
+  sameAs: [
+    "https://maps.app.goo.gl/PzKme5JYUuEcDvMb7"
+  ],
 
   areaServed: [
     "Theni",
@@ -89,6 +97,8 @@ const jsonLd = {
   openingHours: "Mo-Su 08:00-20:00",
 
   priceRange: "₹₹",
+
+hasMap: "https://maps.app.goo.gl/PzKme5JYUuEcDvMb7",
 
   hasOfferCatalog: {
     "@type": "OfferCatalog",
