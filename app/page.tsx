@@ -447,6 +447,55 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* ══════════ POPULAR SERVICES BY LOCATION (SEO links) ══════════ */}
+        <section className="py-20 bg-white border-t border-gray-100">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Reveal>
+              <div className="text-center mb-14">
+                <span className="inline-block bg-amber-50 text-amber-700 border border-amber-200 rounded-full px-4 py-1.5 text-sm font-medium mb-4">
+                  Popular Services
+                </span>
+                <h2 className="text-3xl lg:text-4xl font-extrabold text-gray-900 mb-3">
+                  {lang === 'ta' ? 'உங்கள் நகரத்தில் எங்கள் சேவைகள்' : 'Our Services in Your City'}
+                </h2>
+                <p className="text-gray-500 max-w-xl mx-auto">
+                  {lang === 'ta' ? 'உங்கள் பகுதிக்கான சேவையை தேர்ந்தெடுக்கவும்' : 'Choose your location for doorstep appliance repair'}
+                </p>
+              </div>
+            </Reveal>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {serviceLinks.map((group, gi) => (
+                <Reveal key={group.city} delay={gi * 130}>
+                  <div className="card-lift bg-gray-50 rounded-2xl p-6 border border-gray-200 h-full">
+                    <div className="flex items-center gap-3 mb-5">
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${group.color === 'amber' ? 'bg-amber-100' : group.color === 'blue' ? 'bg-blue-100' : 'bg-purple-100'}`}>
+                        <MapPin className={`w-5 h-5 ${group.color === 'amber' ? 'text-amber-600' : group.color === 'blue' ? 'text-blue-600' : 'text-purple-600'}`} />
+                      </div>
+                      <h3 className="font-bold text-lg text-gray-900">{group.city}</h3>
+                    </div>
+                    <ul className="space-y-2.5">
+                      {group.links.map((link) => (
+                        <li key={link.href}>
+                          <Link
+                            href={link.href}
+                            className="group flex items-center justify-between bg-white border border-gray-200 hover:border-amber-300 hover:bg-amber-50 rounded-xl px-4 py-3 shadow-sm hover:shadow transition-all duration-200"
+                          >
+                            <span className="text-sm font-medium text-gray-800 group-hover:text-amber-700">
+                              {link.label}
+                            </span>
+                            <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-amber-600 group-hover:translate-x-0.5 transition-all" />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* ══════════ WHY CHOOSE US ══════════ */}
         <section className="py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -702,54 +751,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ══════════ POPULAR SERVICES BY LOCATION (SEO links) ══════════ */}
-        <section className="py-20 bg-white border-t border-gray-100">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <Reveal>
-              <div className="text-center mb-14">
-                <span className="inline-block bg-amber-50 text-amber-700 border border-amber-200 rounded-full px-4 py-1.5 text-sm font-medium mb-4">
-                  Popular Services
-                </span>
-                <h2 className="text-3xl lg:text-4xl font-extrabold text-gray-900 mb-3">
-                  {lang === 'ta' ? 'உங்கள் நகரத்தில் எங்கள் சேவைகள்' : 'Our Services in Your City'}
-                </h2>
-                <p className="text-gray-500 max-w-xl mx-auto">
-                  {lang === 'ta' ? 'உங்கள் பகுதிக்கான சேவையை தேர்ந்தெடுக்கவும்' : 'Choose your location for doorstep appliance repair'}
-                </p>
-              </div>
-            </Reveal>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {serviceLinks.map((group, gi) => (
-                <Reveal key={group.city} delay={gi * 130}>
-                  <div className="card-lift bg-gray-50 rounded-2xl p-6 border border-gray-200 h-full">
-                    <div className="flex items-center gap-3 mb-5">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${group.color === 'amber' ? 'bg-amber-100' : group.color === 'blue' ? 'bg-blue-100' : 'bg-purple-100'}`}>
-                        <MapPin className={`w-5 h-5 ${group.color === 'amber' ? 'text-amber-600' : group.color === 'blue' ? 'text-blue-600' : 'text-purple-600'}`} />
-                      </div>
-                      <h3 className="font-bold text-lg text-gray-900">{group.city}</h3>
-                    </div>
-                    <ul className="space-y-2.5">
-                      {group.links.map((link) => (
-                        <li key={link.href}>
-                          <Link
-                            href={link.href}
-                            className="group flex items-center justify-between bg-white border border-gray-200 hover:border-amber-300 hover:bg-amber-50 rounded-xl px-4 py-3 shadow-sm hover:shadow transition-all duration-200"
-                          >
-                            <span className="text-sm font-medium text-gray-800 group-hover:text-amber-700">
-                              {link.label}
-                            </span>
-                            <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-amber-600 group-hover:translate-x-0.5 transition-all" />
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
+        
 
         {/* ══════════ CTA ══════════ */}
         <section className="py-20 bg-gray-50">
