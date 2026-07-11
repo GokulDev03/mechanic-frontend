@@ -9,45 +9,6 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ['latin'] });
 
-// const jsonLd = {
-//   "@context": "https://schema.org",
-//   "@type": "LocalBusiness",
-//   name: "A S SERVICE",
-//  description:
-// "Professional AC, Refrigerator, Washing Machine and TV repair services in Theni, Madurai and Dindigul. Same-day doorstep service for LG, Samsung, Voltas, Daikin, Blue Star and all major brands.",
-//   url: "https://mechanic-frontend-smoky.vercel.app",
-//   image: "https://mechanic-frontend-smoky.vercel.app/og-image.jpg",
-//   telephone: "+91 88070 86727",
-//   address: {
-//     "@type": "PostalAddress",
-//     addressLocality: "Theni",
-//     addressRegion: "Tamil Nadu",
-//     postalCode: "625531",
-//     addressCountry: "IN",
-//   },
-//   sameAs: [],
-//   areaServed: [
-//     "Theni",
-//     "Periyakulam",
-//     "Andipatti",
-//     "Bodinayakanur",
-//     "Cumbum",
-//     "Uthamapalayam",
-//     "Madurai",
-//     "Melur",
-//     "Usilampatti",
-//     "Thirumangalam",
-//     "Dindigul",
-//     "Palani",
-//     "Kodaikanal",
-//     "Oddanchatram",
-//     "Vedasandur",
-//     "Natham",
-//   ],
-//   openingHours: "Mo-Su 08:00-20:00",
-//   priceRange: "₹₹",
-// };
-
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
@@ -68,21 +29,21 @@ const jsonLd = {
   telephone: "+918807086727",
 
   email: "affra.service@gmail.com",
-  
+
 
   address: {
-  "@type": "PostalAddress",
-  streetAddress: "2982+JVX, Fire Engine Office Rd, Ammankulam",
-  addressLocality: "Bodinayakanur",
-  addressRegion: "Tamil Nadu",
-  postalCode: "625513",
-  addressCountry: "IN",
-},
-geo: {
-  "@type": "GeoCoordinates",
-  latitude: "10.0115",
-  longitude: "77.3498",
-},
+    "@type": "PostalAddress",
+    streetAddress: "2982+JVX, Fire Engine Office Rd, Ammankulam",
+    addressLocality: "Bodinayakanur",
+    addressRegion: "Tamil Nadu",
+    postalCode: "625513",
+    addressCountry: "IN",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: "10.0115",
+    longitude: "77.3498",
+  },
 
   sameAs: [
     "https://maps.app.goo.gl/PzKme5JYUuEcDvMb7"
@@ -98,7 +59,7 @@ geo: {
 
   priceRange: "₹₹",
 
-hasMap: "https://maps.app.goo.gl/PzKme5JYUuEcDvMb7",
+  hasMap: "https://maps.app.goo.gl/PzKme5JYUuEcDvMb7",
 
   hasOfferCatalog: {
     "@type": "OfferCatalog",
@@ -173,6 +134,71 @@ const faqJsonLd = {
     }
   ]
 };
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://mechanic-frontend-smoky.vercel.app/services/ac-repair",
+      "name": "AC Repair Service",
+      "description": "Professional AC repair, AC installation, gas filling and maintenance services in Theni, Madurai and Dindigul.",
+      "provider": {
+        "@id": "https://mechanic-frontend-smoky.vercel.app/#business"
+      },
+      "areaServed": [
+        "Theni",
+        "Madurai",
+        "Dindigul"
+      ],
+      "serviceType": "Air Conditioner Repair"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://mechanic-frontend-smoky.vercel.app/services/refrigerator-repair",
+      "name": "Refrigerator Repair Service",
+      "description": "Doorstep refrigerator repair service for all brands.",
+      "provider": {
+        "@id": "https://mechanic-frontend-smoky.vercel.app/#business"
+      },
+      "areaServed": [
+        "Theni",
+        "Madurai",
+        "Dindigul"
+      ],
+      "serviceType": "Refrigerator Repair"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://mechanic-frontend-smoky.vercel.app/services/washing-machine-repair",
+      "name": "Washing Machine Repair Service",
+      "description": "Front load and top load washing machine repair service.",
+      "provider": {
+        "@id": "https://mechanic-frontend-smoky.vercel.app/#business"
+      },
+      "areaServed": [
+        "Theni",
+        "Madurai",
+        "Dindigul"
+      ],
+      "serviceType": "Washing Machine Repair"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://mechanic-frontend-smoky.vercel.app/services/tv-repair",
+      "name": "LED TV Repair Service",
+      "description": "LED, LCD and Smart TV repair service for all brands.",
+      "provider": {
+        "@id": "https://mechanic-frontend-smoky.vercel.app/#business"
+      },
+      "areaServed": [
+        "Theni",
+        "Madurai",
+        "Dindigul"
+      ],
+      "serviceType": "TV Repair"
+    }
+  ]
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mechanic-frontend-smoky.vercel.app"),
@@ -181,9 +207,9 @@ export const metadata: Metadata = {
     canonical: "/",
   },
 
-    title: "AC Service in Theni, Madurai & Dindigul | A S SERVICE - All Brands Repair",
- description:
-    "A S SERVICE offers AC service in Madurai, Dindigul & Theni for all brands - LG, Voltas, Samsung, Blue Star, Daikin. Same-day doorstep repair. Call now for AC service contact number.",   
+  title: "AC Service in Theni, Madurai & Dindigul | A S SERVICE - All Brands Repair",
+  description:
+    "A S SERVICE offers AC service in Madurai, Dindigul & Theni for all brands - LG, Voltas, Samsung, Blue Star, Daikin. Same-day doorstep repair. Call now for AC service contact number.",
   keywords:
     "ac service in madurai, ac service in theni, ac service in dindigul, voltas ac service in madurai, ac service contact number near me, ac repair theni, refrigerator repair madurai, washing machine repair dindigul",
   verification: {
@@ -240,6 +266,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(faqJsonLd),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(serviceJsonLd),
           }}
         />
       </head>
