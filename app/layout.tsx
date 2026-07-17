@@ -227,7 +227,7 @@ export const metadata: Metadata = {
     siteName: "A S SERVICE",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
       },
@@ -239,7 +239,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "A S SERVICE",
     description: "Professional AC, Refrigerator, Washing Machine and TV repair services in Theni. Doorstep service with experienced technicians.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
