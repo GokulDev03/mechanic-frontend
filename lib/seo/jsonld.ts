@@ -75,7 +75,7 @@ export function buildLocationJsonLd(location: LocationData) {
 }
 
 /** Service + FAQPage + BreadcrumbList for a service hub page (e.g. /ac-repair). */
-export function buildServiceJsonLd(service: ServiceConfig, location: LocationData) {
+export function buildServiceJsonLd(service: ServiceConfig) {
   const url = `${SITE_URL}/${service.slug}`;
 
   return {

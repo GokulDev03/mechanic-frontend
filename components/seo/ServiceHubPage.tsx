@@ -13,7 +13,7 @@ import FaqAccordion from './FaqAccordion';
 const SERVICE_ICONS = { Wind, Refrigerator, Waves } as const;
 
 export default function ServiceHubPage({ service }: { service: ServiceConfig }) {
-  const jsonLd = buildServiceJsonLd(service);
+const jsonLd = buildServiceJsonLd(service);
   const telHref = `tel:${BUSINESS.telephone}`;
   const Icon = SERVICE_ICONS[service.icon];
 
@@ -98,8 +98,8 @@ export default function ServiceHubPage({ service }: { service: ServiceConfig }) 
                 </thead>
                 <tbody>
                   {service.pricing.map((row, idx) => (
-                    <tr key={row.label} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                      <td className="px-6 py-4 text-sm text-gray-800">{row.label}</td>
+                    <tr key={row.service} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      <td className="px-6 py-4 text-sm text-gray-800">{row.service}</td>
                       <td className="px-6 py-4 text-sm font-semibold text-gray-900">{row.price}</td>
                     </tr>
                   ))}

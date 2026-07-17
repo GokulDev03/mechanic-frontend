@@ -67,7 +67,7 @@ export default function LocationServicePage({
   location: LocationData;
 }) {
   const t = (text: string) => fillTokens(text, service, location);
-  const jsonLd = buildServiceJsonLd(service, location);
+  const jsonLd = buildServiceJsonLd(service);
   const reviews = getReviews(service, location);
   const nearbyLocationLinks = getNearbyLocationLinks(service, location);
   const sisterServiceLinks = getSisterServiceLinks(service, location);
