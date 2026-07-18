@@ -4,8 +4,8 @@ import type { ServiceConfig } from "./services";
 
 export function buildLocationMetadata(location: LocationData): Metadata {
   const path = `/${location.slug}`;
-  const title = `Appliance Repair in ${location.name} | AC, Fridge & Washing Machine Service – A S SERVICE`;
-  const description = `A S SERVICE offers doorstep AC repair, refrigerator repair, and washing machine repair in ${location.name}. Same-day service, all major brands, certified local technicians.`;
+  const title = `AC, Fridge & Washing Machine Repair in ${location.name} | A S SERVICE`;
+  const description = `A S SERVICE provides same-day AC repair, refrigerator repair, and washing machine repair in ${location.name}. Certified technicians, genuine spare parts, affordable pricing, and doorstep service.`;
   const keywords = [
     `appliance repair ${location.name}`,
     `AC repair ${location.name}`,
@@ -15,6 +15,11 @@ export function buildLocationMetadata(location: LocationData): Metadata {
     `washing machine repair ${location.name}`,
     `home appliance service ${location.name}`,
     `AC service contact number ${location.name}`,
+    `AC installation ${location.name}`,
+`AC gas refilling ${location.name}`,
+`washing machine service ${location.name}`,
+`refrigerator service ${location.name}`,
+`home appliance repair ${location.name}`,
   ];
 
   return {
@@ -47,8 +52,8 @@ export function buildLocationMetadata(location: LocationData): Metadata {
 
 export function buildServiceMetadata(service: ServiceConfig): Metadata {
   const path = `/${service.slug}`;
-  const title = `${service.name} in Theni, Madurai & Dindigul | A S SERVICE`;
-  const description = `${service.tagline}. A S SERVICE provides doorstep ${service.name.toLowerCase()} across Theni, Madurai, Dindigul and surrounding towns. Same-day service, all major brands.`;
+  const title = `${service.name} in Theni, Madurai, Dindigul | Doorstep Service | A S SERVICE`;
+  const description = `Looking for ${service.name.toLowerCase()} in Theni, Madurai, or Dindigul? A S SERVICE provides same-day doorstep repair, certified technicians, genuine spare parts, affordable pricing, and support for all major brands.`;
   const keywords = [
     `${service.name} Theni`,
     `${service.name} Madurai`,
@@ -91,7 +96,7 @@ export function buildMetadata(
 ): Metadata {
   const path = `/${service.slug}-${location.slug}`;
 
-  const title = `${service.serviceName} in ${location.name} | A S SERVICE`;
+  const title = `${service.serviceName} in ${location.name} | Same Day Doorstep Service | A S SERVICE`;
 
   const description = `${service.tagline}. Professional ${service.serviceName.toLowerCase()} in ${location.name}. Same-day doorstep service for all major brands.`;
 
@@ -101,8 +106,13 @@ export function buildMetadata(
 
     keywords: [
       `${service.serviceName} ${location.name}`,
-      `${service.serviceNameShort} repair ${location.name}`,
-      `${location.name} ${service.serviceName}`,
+`${service.serviceNameShort} repair ${location.name}`,
+`${service.serviceName} near me`,
+`${service.serviceName} service ${location.name}`,
+`${service.serviceNameShort} service center ${location.name}`,
+`${service.serviceNameShort} installation ${location.name}`,
+`${service.serviceNameShort} maintenance ${location.name}`,
+`${service.serviceNameShort} technician ${location.name}`,
       ...service.keywordTemplates.map((k) =>
         k.replace("{location}", location.name)
       ),
@@ -124,10 +134,13 @@ export function buildMetadata(
       description,
       siteName: "A S SERVICE",
       images: [
-        {
-          url: service.ogImage,
-        },
-      ],
+{
+url: service.ogImage,
+width:1200,
+height:630,
+alt:title
+}
+]
     },
 
     twitter: {

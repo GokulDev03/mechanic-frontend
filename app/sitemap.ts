@@ -47,6 +47,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
-    priority: route === "/" ? 1 : 0.8,
+    priority:
+  route === "/"
+    ? 1
+    : route.startsWith("/ac-repair") ||
+      route.startsWith("/fridge-repair") ||
+      route.startsWith("/washing-machine-repair")
+    ? 0.9
+    : 0.8,
   }));
 }
