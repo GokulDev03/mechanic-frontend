@@ -23,10 +23,8 @@ const staticRoutes = ["/", "/about", "/contact", "/booking"];
 
 // Dedicated per-service pages that already exist for these 3 cities
 // (referenced in your homepage's `serviceLinks` data).
-const existingServiceCityRoutes = ["theni", "madurai", "dindigul"].flatMap((city) =>
-  ["ac-repair", "fridge-repair", "washing-machine-repair"].map(
-    (service) => `/${service}-${city}`
-  )
+const serviceLocationRoutes = locationList.flatMap((location) =>
+  serviceList.map((service) => `/${service.slug}-${location.slug}`)
 );
 
 // New location hub pages (this update)
@@ -38,7 +36,7 @@ const serviceHubRoutes = serviceList.map((service) => `/${service.slug}`);
 export default function sitemap(): MetadataRoute.Sitemap {
   const allRoutes = [
     ...staticRoutes,
-    ...existingServiceCityRoutes,
+    ...serviceLocationRoutes,
     ...locationRoutes,
     ...serviceHubRoutes,
   ];
