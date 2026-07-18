@@ -105,7 +105,7 @@ const faqJsonLd = {
       "name": "How much does AC repair cost in Theni?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Our AC repair service . The final cost depends on the issue and spare parts required."
+        "text": "AC repair charges start from affordable service rates. The final cost depends on the issue, brand and spare parts required."
       }
     },
     {
@@ -139,7 +139,7 @@ const serviceJsonLd = {
   "@graph": [
     {
       "@type": "Service",
-      "@id": "https://mechanic-frontend-smoky.vercel.app/services/ac-repair",
+      "@id": "https://mechanic-frontend-smoky.vercel.app/ac-repair",
       "name": "AC Repair Service",
       "description": "Professional AC repair, AC installation, gas filling and maintenance services in Theni, Madurai and Dindigul.",
       "provider": {
@@ -154,7 +154,7 @@ const serviceJsonLd = {
     },
     {
       "@type": "Service",
-      "@id": "https://mechanic-frontend-smoky.vercel.app/services/refrigerator-repair",
+      "@id": "https://mechanic-frontend-smoky.vercel.app/fridge-repair",
       "name": "Refrigerator Repair Service",
       "description": "Doorstep refrigerator repair service for all brands.",
       "provider": {
@@ -169,7 +169,7 @@ const serviceJsonLd = {
     },
     {
       "@type": "Service",
-      "@id": "https://mechanic-frontend-smoky.vercel.app/services/washing-machine-repair",
+      "@id": "https://mechanic-frontend-smoky.vercel.app/washing-machine-repair",
       "name": "Washing Machine Repair Service",
       "description": "Front load and top load washing machine repair service.",
       "provider": {
@@ -184,7 +184,7 @@ const serviceJsonLd = {
     },
     {
       "@type": "Service",
-      "@id": "https://mechanic-frontend-smoky.vercel.app/services/tv-repair",
+      "@id": "https://mechanic-frontend-smoky.vercel.app/tv-repair",
       "name": "LED TV Repair Service",
       "description": "LED, LCD and Smart TV repair service for all brands.",
       "provider": {
@@ -212,9 +212,12 @@ export const metadata: Metadata = {
     "A S SERVICE offers AC service in Madurai, Dindigul & Theni for all brands - LG, Voltas, Samsung, Blue Star, Daikin. Same-day doorstep repair. Call now for AC service contact number.",
   keywords:
     "ac service in madurai, ac service in theni, ac service in dindigul, voltas ac service in madurai, ac service contact number near me, ac repair theni, refrigerator repair madurai, washing machine repair dindigul",
-  verification: {
-    google: "_LEUBO8pa94_HAHN1lK8D27IwPjBAZymoNr6K4Vi90g",
+ verification: {
+  google: "_LEUBO8pa94_HAHN1lK8D27IwPjBAZymoNr6K4Vi90g",
+  other: {
+    "msvalidate.01": "119CC6115870C7279A09F11D431E0817",
   },
+},
   icons: {
     icon: "/logo3.png",
     shortcut: "/logo3.png",
