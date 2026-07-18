@@ -223,6 +223,23 @@ const jsonLd = buildServiceJsonLd(service);
           </Reveal>
         </div>
       </section>
+      <section className="mt-16">
+  <h2 className="text-2xl font-bold mb-6">
+    {service.name} Available Locations
+  </h2>
+
+  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+    {locationList.map((location) => (
+      <Link
+        key={location.slug}
+        href={`/${service.slug}-${location.slug}`}
+        className="rounded-lg border p-3 hover:bg-blue-50 hover:border-blue-500 transition"
+      >
+        {service.shortName} Repair in {location.name}
+      </Link>
+    ))}
+  </div>
+</section>
     </>
   );
 }
