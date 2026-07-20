@@ -332,7 +332,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-1 font-bold text-xl text-gray-900 group">
             <Image
-              src="/logo3.png"
+              src="/logo5.png"
               alt="AS Service Logo"
               width={220}
               height={70}
